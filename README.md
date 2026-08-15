@@ -1,23 +1,9 @@
-# React.TS
+# MCMATE
 
-React boilerplate
+MCM 제품과 함께한 순간을 기록하고, 나만의 브랜드 스토리를 만들어가는 AI 기반
+고객 경험 서비스
 
 ```sh
-yarn set version berry
+yarn
+yarn start
 ```
-
-## Recommend Packages
-
-- [vite-react-ssg](https://github.com/Daydreamer-riri/vite-react-ssg): SSG
-
----
-
-- [react-sweet-state](https://atlassian.github.io/react-sweet-state/): Global
-  State Management
-- [react-query](https://tanstack.com/query/latest/docs/framework/react/overview):
-  Server State Management
-
----
-
-- [XState](https://xstate.js.org/docs/): FSM Based, Business Model Implement
-- [react-hook-form](https://react-hook-form.com/): Make Multiple Form
