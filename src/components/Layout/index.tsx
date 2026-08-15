@@ -3,8 +3,8 @@ import styles from "./index.module.scss";
 
 export const Layout = () => {
   return (
-    <>
+    <div className={styles.app}>
       <Outlet />
-    </>
+    </div>
   );
 };

@@ -1,1 +1,11 @@
 /* Layout Styling */
+
+.app {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  background-color: var(--theme-background);
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+}

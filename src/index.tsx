@@ -2,6 +2,7 @@ import "the-new-css-reset/css/reset.css";
 import "@/styles/colors.scss";
 import "@/styles/spacings.scss";
 import "@/styles/typo.scss";
+import "@/styles/root.scss";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
