@@ -2,10 +2,16 @@
 
 .app {
   width: 100%;
-  max-width: 430px;
+  max-width: 390px;
   min-height: 100vh;
   background-color: var(--theme-background);
   box-sizing: border-box;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+.content {
+  min-height: 100vh;
+  padding-top: 40px;
+  background: #ffffff;
 }
