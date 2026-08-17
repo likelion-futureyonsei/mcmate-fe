@@ -65,7 +65,11 @@
   color: rgba(255, 255, 255, 0.82);
   text-decoration: none;
   background:
-    radial-gradient(circle at 62% 38%, rgba(255, 255, 255, 0.22), transparent 20%),
+    radial-gradient(
+      circle at 62% 38%,
+      rgba(255, 255, 255, 0.22),
+      transparent 20%
+    ),
     linear-gradient(135deg, #d1b082, #111111 55%, #f05a35);
 
   span {

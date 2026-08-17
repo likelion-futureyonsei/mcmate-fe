@@ -1,41 +1,67 @@
 import {Link} from "react-router-dom";
+import {
+  IconCamera,
+  IconCheck,
+  IconCheckBtn,
+  IconDate,
+  IconGallery,
+  IconPin,
+  IconPrev,
+} from "@/assets/icons";
 
 import styles from "./index.module.scss";
 
 export function ProductWrite() {
   return (
-    <section className={styles.page} aria-label="product write page">
+    <section aria-label="product write page">
       <div className={styles.topActions}>
-        <Link to="/product-detail" className={styles.back} aria-label="뒤로가기" />
-        <Link to="/product-detail" className={styles.done} aria-label="완료" />
+        <Link id={styles.prev} to="/product-detail" aria-label="뒤로가기">
+          <IconPrev />
+        </Link>
+        <Link to="/product-detail" aria-label="완료">
+          <IconCheck />
+        </Link>
       </div>
 
-      <form className={styles.form}>
-        <label className={styles.photoBox}>
-          <span>사진을 추가하세요</span>
+      <form className={`mt-md`}>
+        <label className={`${styles.photoBox} mb-lg`}>
+          <span className={`typo-h4`}>사진 추가</span>
           <input type="file" accept="image/*" />
+          <div>
+            <button>
+              <IconCamera />
+            </button>
+            <button>
+              <IconGallery />
+            </button>
+          </div>
         </label>
 
-        <label className={styles.field}>
-          <span>제품명</span>
-          <input placeholder="Aren Shoulder Bag" />
-        </label>
+        <div className={styles.place}>
+          <label className={`${styles.field} mb-lg mr-xl`}>
+            <IconPin />
+            <input className={`typo-h4`} placeholder="서울시" />
+          </label>
+          <label className={`${styles.radio} mb-lg`}>
+            <span className={`typo-h5`}>위치 정보</span>
+            <input type="checkbox" defaultChecked />
+            <IconCheckBtn />
+          </label>
+        </div>
 
-        <label className={styles.field}>
-          <span>날짜</span>
-          <input placeholder="2026.08.17" />
+        <label className={`${styles.field} mb-lg`}>
+          <IconDate />
+          <input className={`typo-h4`} placeholder="2026.08.17" />
         </label>
 
         <label className={styles.memo}>
-          <span>추억 기록</span>
-          <textarea maxLength={300} placeholder="제품과 함께한 순간을 적어보세요." />
-          <small>0/300</small>
+          <textarea
+            maxLength={300}
+            className={`typo-h5`}
+            placeholder="제품과 함께한 순간을 적어보세요."
+          />
+          <small className={`typo-h5`}>0/300</small>
         </label>
-
-        <div className={styles.mediaButtons}>
-          <button type="button">카메라</button>
-          <button type="button">앨범</button>
-        </div>
       </form>
     </section>
   );

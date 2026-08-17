@@ -8,12 +8,24 @@ export function ProductDetail() {
       <div className={styles.topActions}>
         <Link to="/my-products" className={styles.back} aria-label="뒤로가기" />
         <div className={styles.actions}>
-          <Link to="/product-write" className={styles.write} aria-label="글쓰기" />
-          <button className={styles.share} type="button" aria-label="공유하기" />
+          <Link
+            to="/product-write"
+            className={styles.write}
+            aria-label="글쓰기"
+          />
+          <button
+            className={styles.share}
+            type="button"
+            aria-label="공유하기"
+          />
         </div>
       </div>
 
-      <Link className={styles.mainPhoto} to="/product-photo" aria-label="첫 번째 사진 보기">
+      <Link
+        className={styles.mainPhoto}
+        to="/product-photo"
+        aria-label="첫 번째 사진 보기"
+      >
         <span>MCM</span>
       </Link>
 

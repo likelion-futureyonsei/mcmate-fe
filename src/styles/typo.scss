@@ -1,21 +1,22 @@
 @use "sass:map";
 @import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 
-$font-family-primary: "Pretendard Variable",
-Pretendard,
--apple-system,
-BlinkMacSystemFont,
-system-ui,
-Roboto,
-"Helvetica Neue",
-"Segoe UI",
-"Apple SD Gothic Neo",
-"Noto Sans KR",
-"Malgun Gothic",
-"Apple Color Emoji",
-"Segoe UI Emoji",
-"Segoe UI Symbol",
-sans-serif;
+$font-family-primary:
+  "Pretendard Variable",
+  Pretendard,
+  -apple-system,
+  BlinkMacSystemFont,
+  system-ui,
+  Roboto,
+  "Helvetica Neue",
+  "Segoe UI",
+  "Apple SD Gothic Neo",
+  "Noto Sans KR",
+  "Malgun Gothic",
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol",
+  sans-serif;
 
 $typography: (
   h1: (
@@ -34,14 +35,14 @@ $typography: (
     line-height: 1.4,
   ),
   h4: (
-    size: 1.5rem,
-    weight: 700,
-    line-height: 1.5,
+    size: 1.6rem,
+    weight: 400,
+    line-height: 2.4,
   ),
   h5: (
-    size: 1.25rem,
-    weight: 700,
-    line-height: 1.6,
+    size: 1.2rem,
+    weight: 400,
+    line-height: 1.8,
   ),
   h6: (
     size: 1rem,

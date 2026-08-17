@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-import { Glass } from "@samasante/liquid-glass";
+import {Glass} from "@samasante/liquid-glass";
 
 import styles from "./index.module.scss";
 
