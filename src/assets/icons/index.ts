@@ -5,3 +5,9 @@ export {default as IconGallery} from "./icon-gallery.svg?react";
 export {default as IconDate} from "./icon-date.svg?react";
 export {default as IconCamera} from "./icon-camera.svg?react";
 export {default as IconCheckBtn} from "./icon-check-btn.svg?react";
+
+export {default as IconHome} from "./icon-home.svg?react";
+export {default as IconMemory} from "./icon-memory.svg?react";
+export {default as IconSearch} from "./icon-search.svg?react";
+export {default as IconStore} from "./icon-store.svg?react";
+export {default as IconUser} from "./icon-user.svg?react";
