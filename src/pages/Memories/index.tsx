@@ -2,7 +2,7 @@ import styles from "./index.module.scss";
 
 export function Memories() {
   return (
-    <section className={styles.page}>
+    <section>
       <h1>추억</h1>
     </section>
   );

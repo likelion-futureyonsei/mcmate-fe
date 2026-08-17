@@ -2,7 +2,7 @@ import styles from "./index.module.scss";
 
 export function Settings() {
   return (
-    <section className={styles.page}>
+    <section>
       <h1>설정</h1>
     </section>
   );
