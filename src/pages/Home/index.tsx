@@ -1,12 +1,13 @@
 import {Link} from "react-router-dom";
 
 import styles from "./index.module.scss";
+import {Logo} from "@/assets/images";
 
 export function Home() {
   return (
     <section className={styles.page} aria-label="home page">
       <header className={styles.brand}>
-        <span>MCMATE</span>
+        <img src={Logo} alt="" />
       </header>
 
       <div className={styles.hero}>

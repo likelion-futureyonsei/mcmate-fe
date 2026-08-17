@@ -1,10 +1,10 @@
 .brand {
   display: flex;
   justify-content: center;
-  height: 32px;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 0;
+
+  img {
+    height: 30px;
+  }
 }
 
 .hero {
