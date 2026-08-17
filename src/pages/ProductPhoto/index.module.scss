@@ -1,87 +1,190 @@
 .page {
-  min-height: calc(100vh - 40px);
-  padding-bottom: 120px;
-  background: #ffffff;
+  position: relative;
+  width: 390px;
+  height: 844px;
+  min-height: 844px;
+  overflow: hidden;
+  background-image: url("@/assets/images/product-photo-bg.png");
+  background-repeat: no-repeat;
+  background-size: 418px 874px;
+  background-position: 0 -15px;
+}
+
+.page::after {
+  content: none;
+}
+
+.background {
+  display: none;
+}
+
+.heroPanel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 390px;
+  height: 423px;
+  background: #eeeeef;
 }
 
 .topActions {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  top: 47px;
+  left: 16px;
+  right: 17px;
+  z-index: 3;
   display: flex;
   justify-content: space-between;
   height: 44px;
-  padding: 0 20px;
 }
 
 .back,
 .share {
+  position: relative;
   display: grid;
   place-items: center;
   width: 44px;
   height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  color: #000000;
+  background: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
 }
 
-.back::before {
-  width: 13px;
-  height: 13px;
-  border-bottom: 3px solid #000000;
-  border-left: 3px solid #000000;
-  content: "";
-  transform: rotate(45deg);
-}
-
-.share::before {
-  width: 18px;
-  height: 18px;
-  border: 2px solid #000000;
-  border-top: 0;
-  border-radius: 4px;
-  content: "";
+.back svg,
+.share svg {
+  display: block;
 }
 
 .photo {
+  position: absolute;
+  top: 100px;
+  left: 105px;
+  z-index: 2;
+  width: 180px;
+  height: 239px;
+  border-radius: 7px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+}
+
+.meta {
+  position: absolute;
+  top: 363px;
+  left: 62px;
+  z-index: 2;
   display: grid;
-  place-items: center;
-  height: 374px;
-  margin-top: -44px;
-  background:
-    radial-gradient(circle at 58% 56%, #121212 0 19%, transparent 20%),
-    linear-gradient(135deg, #c69d66, #f35835 72%);
-
-  span {
-    color: rgba(255, 255, 255, 0.82);
-    font-size: 40px;
-    font-weight: 900;
-  }
-}
-
-.toolbar {
-  display: flex;
-  gap: 42px;
+  grid-template-columns: 61px 1px 109px 1px 80px;
   align-items: center;
-  height: 56px;
-  padding: 0 48px;
-  border-bottom: 1px solid #ececef;
+  width: 252px;
+  height: 34px;
+  color: #000000;
+}
 
-  span,
+.metaItem {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+
   strong {
-    font-size: 16px;
-    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+
+    svg {
+      display: block;
+      flex: 0 0 auto;
+    }
   }
 }
 
-.caption {
-  padding: 28px 20px 0;
+.metaItem:last-child {
+  transform: translateX(5px);
+}
+
+.metaLabel {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.metaDivider {
+  width: 1px;
+  height: 30px;
+  border-radius: 999px;
+  background: #d7d7d7;
+}
+
+.entry {
+  position: absolute;
+  top: 449px;
+  left: 21px;
+  z-index: 2;
+  width: 348px;
+  color: #000000;
 
   h1 {
-    font-size: 22px;
-    font-weight: 900;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0;
   }
 
   p {
-    margin-top: 18px;
+    margin: 17px 0 0;
     font-size: 15px;
-    font-weight: 600;
-    line-height: 1.7;
+    font-weight: 400;
+    line-height: 1.63;
+    letter-spacing: 0;
+    white-space: pre-line;
   }
+}
+
+.entryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.like {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-right: 3px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #000000;
+
+  svg {
+    display: block;
+    width: 24px;
+    height: 21px;
+  }
+}
+
+.thumbnails {
+  position: absolute;
+  top: 701px;
+  left: 176px;
+  z-index: 4;
+  width: 214px;
+  height: 50px;
+  overflow: hidden;
+  pointer-events: none;
+  background-image: url("/product-photo-thumbnails-current.svg");
+  background-repeat: no-repeat;
+  background-position: -176px -701px;
+  background-size: 390px 844px;
 }
