@@ -11,3 +11,5 @@ export {default as IconMemory} from "./icon-memory.svg?react";
 export {default as IconSearch} from "./icon-search.svg?react";
 export {default as IconStore} from "./icon-store.svg?react";
 export {default as IconUser} from "./icon-user.svg?react";
+export {default as IconMap} from "./icon-map.svg?react";
+export {default as IconStorybook} from "./icon-storybook.svg?react";

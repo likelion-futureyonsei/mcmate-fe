@@ -1,32 +1,79 @@
+﻿.page {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  background-image: url("../../assets/images/product-write-bg.png");
+  background-size: 418px 874px;
+  background-position: 0 -15px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
 .topActions {
+  position: absolute;
+  top: 47px;
+  left: 16px;
+  right: 17px;
+  z-index: 3;
   display: flex;
   justify-content: space-between;
-  width: calc(100% + 20px);
-  margin-left: -10px;
+
+  a,
+  button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    color: #000000;
+    border-radius: 50%;
+    background: rgba(238, 238, 239, 0.7);
+    -webkit-tap-highlight-color: transparent;
+  }
 
   #prev {
-    margin-left: -2px;
+    background-color: rgba(238, 238, 239, 0.7);
+  }
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  #prev svg {
+    width: 44px;
+    height: 44px;
   }
 }
 
-.field,
+.form {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  z-index: 2;
+  width: 350px;
+}
+
+.photoBox,
+.placeField,
+.dateField,
 .memo {
-  height: 47px;
-  border: 1px solid var(--color-neutral);
-  border-radius: 6px;
+  box-sizing: border-box;
+  border: 1px solid #8a8a8d;
+  background: transparent;
+  color: #000000;
 }
 
 .photoBox {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: var(--spacing-md);
-  width: 100%;
+  justify-content: center;
+  gap: 18px;
+  width: 350px;
   height: 205px;
-  border: 1px solid var(--color-neutral);
   border-radius: 8px;
-  color: var(--theme-text);
 
   input {
     display: none;
@@ -34,74 +81,141 @@
 
   div {
     display: flex;
-    flex-direction: row;
-    gap: var(--spacing-lg);
+    gap: 21px;
   }
 
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .mediaButton {
+    display: grid;
+    place-items: center;
     width: 44px;
     height: 44px;
-    border: 1px solid var(--color-neutral);
-    border-radius: 9999px;
+    padding: 0;
+    color: #000000;
+    border: 1px solid #8a8a8d;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+  }
+
+  svg {
+    width: 40px;
+    height: 40px;
   }
 }
 
-.field {
+.place {
+  position: absolute;
+  top: 225px;
+  left: 0;
   display: grid;
-  grid-template-columns: 40px 1fr;
+  grid-template-columns: 240px 82px;
+  column-gap: 27px;
   align-items: center;
+  width: 350px;
+}
+
+.placeField,
+.dateField {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  align-items: center;
+  height: 47px;
+  border-radius: 6px;
+
+  svg {
+    justify-self: center;
+    width: 40px;
+    height: 40px;
+  }
 
   input {
     min-width: 0;
+    padding: 0;
     color: #000000;
+    border: 0;
+    outline: 0;
+    background: transparent;
+  }
+}
+
+.placeField {
+  width: 240px;
+}
+
+.locationToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  height: 47px;
+  color: #000000;
+
+  span {
+    white-space: nowrap;
   }
 }
 
 .radio {
-  display: inline-flex;
-  justify-content: end;
-  align-items: center;
+  display: grid;
+  place-items: center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: #000000;
   cursor: pointer;
+  border-radius: 6px;
+  background: transparent;
 
   input {
     display: none;
 
     &:checked + svg {
-      color: var(--color-success);
+      color: #00ab80;
     }
   }
 
   svg {
-    margin-left: var(--spacing-sm);
-    color: var(--color-neutral);
-    transition: all 0.2s ease;
+    width: 36px;
+    height: 36px;
+    color: #000000;
+    transition: color 0.15s ease;
   }
 }
 
-.place {
-  display: grid;
-  grid-template-columns: 1fr 76px;
-  align-items: center;
+.dateField {
+  position: absolute;
+  top: 292px;
+  left: 0;
+  width: 350px;
 }
 
 .memo {
-  position: relative;
-  display: grid;
-  gap: var(--spacing-sm);
-  min-height: 61px;
-  padding: 9px 14px 8px 14px;
+  position: absolute;
+  top: 359px;
+  left: 0;
+  width: 350px;
+  height: 61px;
+  padding: 9px 14px;
+  border-radius: 6px;
 
   textarea {
+    width: 100%;
+    height: 29px;
+    padding: 0;
     resize: none;
+    color: #000000;
+    border: 0;
+    outline: 0;
+    background: transparent;
   }
 
   small {
     position: absolute;
-    right: 14px;
-    bottom: 8px;
-    color: var(--color-neutral);
+    right: 21px;
+    bottom: 12px;
+    color: #8a8a8d;
   }
 }
+
+

@@ -1,77 +1,129 @@
 .page {
   position: relative;
-  min-height: calc(100vh - 40px);
-  padding: 14px 20px 120px;
-  background: #ffffff;
-}
-
-.topActions {
-  display: flex;
-  justify-content: flex-end;
-  height: 44px;
+  width: 390px;
+  min-height: 844px;
+  overflow: hidden;
+  background: #d6ffda;
 }
 
 .close {
-  position: relative;
+  position: absolute;
+  top: 47px;
+  right: 17px;
+  z-index: 4;
+  display: block;
   width: 44px;
   height: 44px;
-}
+  border-radius: 999px;
+  color: #000000;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 
-.close::before,
-.close::after {
-  position: absolute;
-  top: 21px;
-  left: 12px;
-  width: 20px;
-  height: 3px;
-  border-radius: 3px;
-  background: #000000;
-  content: "";
-}
-
-.close::before {
-  transform: rotate(45deg);
-}
-
-.close::after {
-  transform: rotate(-45deg);
-}
-
-.scanArea {
-  display: grid;
-  place-items: center;
-  height: 306px;
-  margin-top: 62px;
-}
-
-.scanArea span {
-  width: 200px;
-  height: 200px;
-  border: 6px solid #000000;
-  border-radius: 34px;
-  box-shadow:
-    inset 42px 42px 0 -36px #ffffff,
-    inset -42px 42px 0 -36px #ffffff,
-    inset 42px -42px 0 -36px #ffffff,
-    inset -42px -42px 0 -36px #ffffff;
-}
-
-.guide {
-  margin-top: 26px;
-  text-align: center;
-
-  h1 {
-    font-size: 24px;
-    font-weight: 900;
+  svg {
+    display: block;
+    width: 44px;
+    height: 44px;
   }
+}
 
-  p {
-    width: 250px;
-    margin: 14px auto 0;
-    color: #5f6064;
+.scanInstruction {
+  position: absolute;
+  top: 125px;
+  left: 71px;
+  z-index: 2;
+  width: 248px;
+  margin: 0;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.scanFrame {
+  position: absolute;
+  top: 190px;
+  left: 95px;
+  z-index: 1;
+  display: block;
+  width: 200px;
+  height: 201px;
+}
+
+.numberShortcut {
+  position: absolute;
+  top: 565px;
+  left: 17px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 74px;
+  border-radius: 25px;
+  color: #000000;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+
+  > span:last-child {
+    position: absolute;
+    top: 53px;
+    left: 0;
+    width: 50px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.1;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
+.numberIcon,
+.lightIcon {
+  position: absolute;
+  top: 0;
+  left: 3px;
+  display: block;
+  width: 44px;
+  height: 44px;
+
+  svg {
+    display: block;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.lightToggle {
+  position: absolute;
+  top: 434px;
+  left: 170px;
+  z-index: 5;
+  display: flex;
+  width: 50px;
+  height: 74px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 25px;
+  color: #000000;
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  > span:last-child {
+    position: absolute;
+    top: 54px;
+    left: -28px;
+    width: 106px;
     font-size: 14px;
-    font-weight: 600;
-    line-height: 1.6;
+    font-weight: 400;
+    line-height: 1.1;
+    text-align: center;
+    white-space: nowrap;
   }
 }
 
@@ -80,39 +132,94 @@
   right: 0;
   bottom: 0;
   left: 0;
-  display: grid;
-  gap: 12px;
-  padding: 24px 20px 132px;
+  z-index: 1;
+  height: 190px;
   border-radius: 25px 25px 0 0;
-  background: rgba(255, 255, 255, 0.86);
-  box-shadow: 0 -18px 42px rgba(15, 23, 42, 0.12);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  background: #ffffff;
 }
 
 .handle {
-  justify-self: center;
+  position: absolute;
+  top: 7px;
+  left: 180px;
   width: 30px;
   height: 3px;
-  margin-bottom: 6px;
-  border-radius: 2px;
+  border-radius: 999px;
   background: #8a8a8d;
 }
 
-.sheet a,
-.sheet button {
-  height: 44px;
-  border-radius: 8px;
-  color: #000000;
-  font-size: 15px;
-  font-weight: 800;
-  text-align: center;
-  text-decoration: none;
-  line-height: 44px;
-  background: rgba(255, 255, 255, 0.75);
+.previewBox {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 76px;
+  height: 79px;
+  border-radius: 3px;
+  background: #eeeeef;
 }
 
-.primary {
-  background: #000000 !important;
-  color: #ffffff !important;
+.previewEmpty {
+  position: absolute;
+  top: 25px;
+  left: 114px;
+  color: #8f8f92;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.metaLabel,
+.metaLabelRight,
+.metaEmpty,
+.metaEmptyRight {
+  position: absolute;
+  top: 61px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.metaLabel {
+  left: 113px;
+}
+
+.metaEmpty {
+  left: 142px;
+  color: #8f8f92;
+  font-size: 14px;
+  line-height: 0.9;
+}
+
+.metaLabelRight {
+  left: 210px;
+}
+
+.metaEmptyRight {
+  left: 250px;
+  color: #8f8f92;
+  font-size: 14px;
+  line-height: 0.9;
+}
+
+.registerButton {
+  position: absolute;
+  top: 111px;
+  left: 20px;
+  display: grid;
+  width: 350px;
+  height: 44px;
+  place-items: center;
+  border: 0;
+  border-radius: 22px;
+  background: #eeeeef;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }

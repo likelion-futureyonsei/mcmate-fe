@@ -4,7 +4,7 @@ import {Layout} from "@/components";
 
 import {
   Home,
-  Memories,
+  Map,
   MyProducts,
   NotFound,
   NumberInput,
@@ -14,6 +14,8 @@ import {
   ProductWrite,
   Search,
   Settings,
+  Start,
+  StorybookEpisode,
   Store,
 } from "@/pages";
 
@@ -24,7 +26,8 @@ export const useRouter = () =>
       element: <Layout />,
       errorElement: <NotFound />,
       children: [
-        {index: true, element: <Home />},
+        {index: true, element: <Start />},
+        {path: "home", element: <Home />},
         {path: "my-products", element: <MyProducts />},
         {path: "product-detail", element: <ProductDetail />},
         {path: "product-photo", element: <ProductPhoto />},
@@ -32,8 +35,9 @@ export const useRouter = () =>
         {path: "product-add", element: <ProductAdd />},
         {path: "number-input", element: <NumberInput />},
         {path: "store", element: <Store />},
-        {path: "memories", element: <Memories />},
+        {path: "map", element: <Map />},
         {path: "settings", element: <Settings />},
+        {path: "storybook-episode", element: <StorybookEpisode />},
         {path: "search", element: <Search />},
       ],
     },

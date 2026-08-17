@@ -1,153 +1,242 @@
-.page {
-  min-height: calc(100vh - 40px);
-  padding: 14px 20px 120px;
-  background: #ffffff;
+﻿.page {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  min-height: 844px;
+  overflow: hidden;
+  color: #000000;
+  background-image: url("@/assets/images/my-products-bg.png");
+  background-repeat: no-repeat;
+  background-size: 418px 874px;
+  background-position: 0 -15px;
 }
 
-.topActions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 40px;
+.reference {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 390px;
+  height: 844px;
+  pointer-events: none;
+  user-select: none;
 }
 
-.back,
-.add {
+.back {
+  position: absolute;
+  top: 47px;
+  left: 16px;
+  z-index: 3;
   display: grid;
   place-items: center;
   width: 44px;
   height: 44px;
+  padding: 0;
+  border: 0;
   color: #000000;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1) !important;
+  text-decoration: none;
+
+  svg {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.actions {
+  position: absolute;
+  top: 47px;
+  right: 16px;
+  z-index: 3;
+  width: 100px;
+  height: 44px;
+
+  svg {
+    display: block;
+    width: 100px;
+    height: 44px;
+  }
+}
+
+.addHotspot,
+.menuHotspot {
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
   text-decoration: none;
 }
 
-.back::before {
-  width: 13px;
-  height: 13px;
-  border-bottom: 3px solid currentColor;
-  border-left: 3px solid currentColor;
-  content: "";
-  transform: rotate(45deg);
+.addHotspot {
+  left: 0;
 }
 
-.add {
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.33);
-  font-size: 28px;
-  font-weight: 300;
+.menuHotspot {
+  right: 1px;
 }
 
-h1 {
-  margin-top: 10px;
-  font-size: 32px;
+.title {
+  position: absolute;
+  top: 108px;
+  left: 19px;
+  margin: 0;
+  font-size: 31px;
   font-weight: 900;
+  line-height: 1;
   letter-spacing: 0;
 }
 
-.count {
-  margin-top: 6px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.collage {
-  position: relative;
-  height: 390px;
-  margin-top: 22px;
-}
-
-.collage span {
+.productLink {
   position: absolute;
+  z-index: 2;
   display: block;
-  border-radius: 4px;
-  background-size: 140% 140%;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
-}
-
-.photoA {
-  top: 0;
-  left: -62px;
-  width: 270px;
-  height: 292px;
-  background: linear-gradient(135deg, #b4936c, #171717 62%, #f45d2d);
-}
-
-.photoB {
-  top: 120px;
-  right: -15px;
-  width: 270px;
-  height: 204px;
-  background: linear-gradient(135deg, #d7c2a3, #111111 54%, #4a8a66);
-}
-
-.photoC {
-  right: 12px;
-  bottom: 10px;
-  width: 216px;
-  height: 102px;
-  background: linear-gradient(135deg, #c63b2c, #f4eee5);
-}
-
-.photoD {
-  bottom: 48px;
-  left: -21px;
-  width: 149px;
-  height: 162px;
-  background: linear-gradient(135deg, #0f0f10, #b6814d);
-}
-
-.list {
-  display: grid;
-  gap: 12px;
-  margin-top: 8px;
-}
-
-.row {
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  gap: 14px;
-  align-items: center;
-  width: 100%;
-  min-height: 64px;
-  color: #000000;
-  text-align: left;
   text-decoration: none;
 }
 
-.thumb {
-  width: 46px;
-  height: 50px;
-  border-radius: 3px;
+.backpackLink {
+  top: 170px;
+  left: 36px;
+  width: 120px;
+  height: 214px;
 }
 
-.black {
-  background: linear-gradient(145deg, #0b0b0c, #44403a);
-}
-
-.tan {
-  background: linear-gradient(145deg, #b69a78, #25211e);
-}
-
-.green {
-  background: linear-gradient(145deg, #146144, #d2c3a0);
-}
-
-.red {
-  background: linear-gradient(145deg, #d1432b, #161616);
-}
-
-.meta strong,
-.meta small {
+.backpack,
+.beltbag,
+.weekender,
+.phone,
+.shoes,
+.card {
+  position: absolute;
   display: block;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
 }
 
-.meta strong {
-  font-size: 15px;
-  font-weight: 800;
+.backpack {
+  top: 152px;
+  left: 21px;
+  width: 145px;
+  height: 180px;
 }
 
-.meta small {
-  margin-top: 6px;
-  font-size: 12px;
-  color: #8a8a8d;
+.beltbag {
+  top: 178px;
+  left: 154px;
+  width: 215px;
+  height: 91px;
 }
+
+.weekender {
+  top: 317px;
+  left: 117px;
+  width: 272px;
+  height: 203px;
+}
+
+.phone {
+  top: 367px;
+  left: -3px;
+  width: 146px;
+  height: 162px;
+}
+
+.shoes {
+  top: 560px;
+  left: 163px;
+  width: 222px;
+  height: 105px;
+}
+
+.card {
+  top: 611px;
+  left: 35px;
+  width: 168px;
+  height: 168px;
+  opacity: 0.85;
+}
+
+.caption {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  color: #000000;
+  text-align: center;
+
+  strong {
+    font-size: 13.5px;
+    font-weight: 400;
+    line-height: 1.22;
+    letter-spacing: 0;
+  }
+}
+
+.progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.boxIcon {
+  position: relative;
+  display: inline-block;
+  width: 13px;
+  height: 11px;
+  box-sizing: border-box;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+
+  &::before {
+    position: absolute;
+    top: -5px;
+    left: 2px;
+    width: 7px;
+    height: 4px;
+    border: 2px solid currentColor;
+    border-bottom: 0;
+    border-radius: 2px 2px 0 0;
+    content: "";
+  }
+}
+
+.backpackCaption {
+  top: 334px;
+  left: 30px;
+  width: 127px;
+}
+
+.beltbagCaption {
+  top: 278px;
+  left: 190px;
+  width: 180px;
+}
+
+.phoneCaption {
+  top: 539px;
+  left: 16px;
+  width: 134px;
+}
+
+.weekenderCaption {
+  top: 529px;
+  left: 191px;
+  width: 190px;
+}
+
+
+
+
+
+
+
