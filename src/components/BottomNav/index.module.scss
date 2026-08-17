@@ -4,17 +4,10 @@
   bottom: 21px;
   left: calc((100vw - min(100vw, 390px)) / 2 + 21px);
   z-index: 35;
-  display: grid;
+  display: grid !important;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   height: 62px;
   border-radius: 31px;
-  background: rgba(255, 255, 255, 0.48);
-  box-shadow:
-    0 18px 42px rgba(15, 23, 42, 0.18),
-    0 2px 10px rgba(15, 23, 42, 0.08);
-  outline: 1px solid rgba(15, 23, 42, 0.035);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  backdrop-filter: blur(18px) saturate(160%);
 }
 
 .item {

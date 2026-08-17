@@ -1,4 +1,5 @@
 import {NavLink} from "react-router-dom";
+import { Glass } from "@samasante/liquid-glass";
 
 import styles from "./index.module.scss";
 
@@ -12,7 +13,7 @@ const items = [
 
 export const BottomNav = () => {
   return (
-    <nav className={styles.nav} aria-label="main navigation">
+    <Glass className={styles.nav} aria-label="main navigation">
       {items.map((item) => (
         <NavLink
           key={item.to}
@@ -26,6 +27,6 @@ export const BottomNav = () => {
           <span className={styles.label}>{item.label}</span>
         </NavLink>
       ))}
-    </nav>
+    </Glass>
   );
 };

@@ -464,6 +464,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@samasante/liquid-glass@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@samasante/liquid-glass@npm:0.1.1"
+  peerDependencies:
+    react: ">=18"
+    react-dom: ">=18"
+  checksum: 10c0/12a45c3f213a9412dcb98e0e053cfef7707b7697ca22aa7eaed5a7f30e5803f757274652c378a5d0e823d6fe24aa4faf65b32d06f758f263f74f1b23f7b59cba
+  languageName: node
+  linkType: hard
+
 "@tybys/wasm-util@npm:^0.10.3":
   version: 0.10.3
   resolution: "@tybys/wasm-util@npm:0.10.3"
@@ -2698,6 +2708,7 @@ __metadata:
   resolution: "react.ts@workspace:."
   dependencies:
     "@eslint/js": "npm:10"
+    "@samasante/liquid-glass": "npm:^0.1.1"
     "@types/node": "npm:^26.1.2"
     "@types/react": "npm:^19"
     "@types/react-dom": "npm:^19"
