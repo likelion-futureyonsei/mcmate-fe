@@ -3,19 +3,5 @@
     justify-content: center;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
-    background-color: #f3f4f6;
-    color: #050505;
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "SF Pro Text",
-        "Apple SD Gothic Neo",
-        "Noto Sans KR",
-        "Segoe UI",
-        sans-serif;
-}
-
-body {
-    margin: 0;
+    background-color: var(--color-neutral-light);
 }
