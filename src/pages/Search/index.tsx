@@ -1,9 +1,9 @@
-import styles from "./index.module.scss";
+// import styles from "./index.module.scss";
 
 export function Search() {
   return (
     <section>
-      <h1>검색</h1>
+      <h1 className="typo-h1">검색</h1>
     </section>
   );
 }
