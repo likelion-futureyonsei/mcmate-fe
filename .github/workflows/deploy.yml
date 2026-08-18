@@ -1,0 +1,33 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: Deploy to server
+        run: |
+          sshpass -p '${{ secrets.PASSWORD }}' rsync -avz -e 'ssh -p ${{ secrets.PORT }} -o StrictHostKeyChecking=no' dist/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/root/data/nginx/html/
