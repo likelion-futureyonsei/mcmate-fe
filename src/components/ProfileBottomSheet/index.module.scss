@@ -1,0 +1,31 @@
+.sheet {
+  position: absolute;
+  top: 55px;
+  left: 0;
+  z-index: 50;
+  width: 390px;
+  height: 789px;
+  overflow: hidden;
+  background: #f8f8f8;
+  border-radius: 50px 50px 0 0;
+}
+
+.sheet > img {
+  display: block;
+  width: 390px;
+  height: 789px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.close {
+  position: absolute;
+  top: 24px;
+  right: 23px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+}

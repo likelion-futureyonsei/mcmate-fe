@@ -1,42 +1,25 @@
+import {useState} from "react";
 import {Link} from "react-router-dom";
 
+import {ProfileBottomSheet} from "@/components/ProfileBottomSheet";
+
 import styles from "./index.module.scss";
-import {Logo} from "@/assets/images";
 
 export function Home() {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   return (
     <section className={styles.page} aria-label="home page">
-      <header className={styles.brand}>
-        <img src={Logo} alt="" />
-      </header>
-
-      <div className={styles.hero}>
-        <p className={styles.eyebrow}>My Archive</p>
-        <h1>나의 MCM을 기록하고 확인하세요</h1>
-      </div>
-
-      <Link className={styles.productCard} to="/my-products">
-        <div className={styles.bagPreview}>
-          <span className={styles.handle} />
-          <span className={styles.body} />
-          <span className={styles.badge}>MCM</span>
-        </div>
-        <div className={styles.productInfo}>
-          <strong>나의 제품</strong>
-          <span>72/280</span>
-        </div>
-      </Link>
-
-      <div className={styles.summary}>
-        <article>
-          <strong>17</strong>
-          <span>추억</span>
-        </article>
-        <article>
-          <strong>5</strong>
-          <span>등록 대기</span>
-        </article>
-      </div>
+      <img className={styles.reference} src="/ref-home-new-clean.svg?v=home-20260817-clean" alt="" aria-hidden="true" />
+      <button className={styles.profileHotspot} type="button" aria-label="프로필 메뉴 열기" onClick={() => setIsProfileOpen(true)} />
+      <Link className={styles.writeHotspot} to="/product-write" aria-label="글쓰기" />
+      <Link className={styles.firstProductCardHotspot} to="/product-detail" aria-label="첫 번째 제품 상세 보기" />
+      <Link
+        className={styles.productHotspot}
+        to="/my-products"
+        aria-label="Go to my products"
+      />
+      {isProfileOpen && <ProfileBottomSheet onClose={() => setIsProfileOpen(false)} />}
     </section>
   );
 }
