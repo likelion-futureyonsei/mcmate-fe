@@ -1,0 +1,118 @@
+.page {
+  position: relative;
+  min-height: calc(100vh - 40px);
+  padding: 14px 20px 120px;
+  background: #ffffff;
+}
+
+.topActions {
+  display: flex;
+  justify-content: flex-end;
+  height: 44px;
+}
+
+.close {
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+
+.close::before,
+.close::after {
+  position: absolute;
+  top: 21px;
+  left: 12px;
+  width: 20px;
+  height: 3px;
+  border-radius: 3px;
+  background: #000000;
+  content: "";
+}
+
+.close::before {
+  transform: rotate(45deg);
+}
+
+.close::after {
+  transform: rotate(-45deg);
+}
+
+.scanArea {
+  display: grid;
+  place-items: center;
+  height: 306px;
+  margin-top: 62px;
+}
+
+.scanArea span {
+  width: 200px;
+  height: 200px;
+  border: 6px solid #000000;
+  border-radius: 34px;
+  box-shadow:
+    inset 42px 42px 0 -36px #ffffff,
+    inset -42px 42px 0 -36px #ffffff,
+    inset 42px -42px 0 -36px #ffffff,
+    inset -42px -42px 0 -36px #ffffff;
+}
+
+.guide {
+  margin-top: 26px;
+  text-align: center;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 900;
+  }
+
+  p {
+    width: 250px;
+    margin: 14px auto 0;
+    color: #5f6064;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+}
+
+.sheet {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  gap: 12px;
+  padding: 24px 20px 132px;
+  border-radius: 25px 25px 0 0;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 -18px 42px rgba(15, 23, 42, 0.12);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.handle {
+  justify-self: center;
+  width: 30px;
+  height: 3px;
+  margin-bottom: 6px;
+  border-radius: 2px;
+  background: #8a8a8d;
+}
+
+.sheet a,
+.sheet button {
+  height: 44px;
+  border-radius: 8px;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  line-height: 44px;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.primary {
+  background: #000000 !important;
+  color: #ffffff !important;
+}

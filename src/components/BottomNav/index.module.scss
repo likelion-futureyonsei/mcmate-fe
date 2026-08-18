@@ -1,0 +1,44 @@
+.nav {
+  position: fixed;
+  bottom: 20px;
+  width: calc(100vw - 40px);
+  max-width: 390px;
+  z-index: 35;
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  height: 62px;
+  border-radius: 31px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  color: #000000;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.active {
+  color: #007dfa;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+}
+.icon,
+.label {
+  position: relative;
+  z-index: 1;
+}
+
+.label {
+  position: absolute;
+  bottom: 8px;
+}
+
+.icon {
+  position: absolute;
+  top: 4px;
+  width: 40px;
+  height: 40px;
+}

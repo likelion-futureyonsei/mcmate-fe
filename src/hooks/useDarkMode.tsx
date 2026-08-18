@@ -1,14 +1,15 @@
 import {useState, useEffect} from "react";
 
 export const useDarkMode = () => {
-  const [theme, setTheme] = useState(() => {
-    const isUserColorTheme = localStorage.getItem("data-theme");
-    const isOsColorTheme = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
-      ? "dark"
-      : "light";
-    return isUserColorTheme || isOsColorTheme;
-  });
+  //   const [theme, setTheme] = useState(() => {
+  //     const isUserColorTheme = localStorage.getItem("data-theme");
+  //     const isOsColorTheme = window.matchMedia("(prefers-color-scheme: dark)")
+  //       .matches
+  //       ? "dark"
+  //       : "light";
+  //     return isUserColorTheme || isOsColorTheme;
+  //   });
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
