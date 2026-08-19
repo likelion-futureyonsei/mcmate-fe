@@ -26,20 +26,16 @@
   overflow: hidden;
 }
 
-.profileHotspot {
+.dogBox {
   position: absolute;
-  top: 47px;
-  left: 326px;
-  z-index: 3;
+  top: 562px;
+  left: 80px;
+  z-index: 1;
   display: block;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  overflow: hidden;
-  border-radius: 50%;
-  text-decoration: none;
+  width: 231px;
+  height: 186px;
+  pointer-events: none;
+  user-select: none;
 }
 
 .writeHotspot {
@@ -55,22 +51,36 @@
   text-decoration: none;
 }
 
+.dogHotspot {
+  position: absolute;
+  top: 315px;
+  left: 115px;
+  z-index: 3;
+  display: block;
+  width: 160px;
+  height: 215px;
+  border-radius: 24px;
+  background: transparent;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .firstProductCardHotspot {
   position: absolute;
-  top: 588px;
+  top: 580px;
   left: 92px;
   z-index: 3;
   display: block;
-  width: 65px;
-  height: 83px;
+  width: 62px;
+  height: 80px;
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: 2px;
   text-decoration: none;
 }
 
 .productHotspot {
   position: absolute;
-  top: 685px;
+  top: 682px;
   left: 170px;
   z-index: 3;
   display: block;

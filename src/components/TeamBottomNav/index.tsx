@@ -7,6 +7,7 @@ import styles from "./index.module.scss";
 
 const homePaths = new Set([
   "/home",
+  "/dog-detail",
   "/my-products",
   "/product-detail",
   "/product-photo",
@@ -19,7 +20,7 @@ const items = [
   {to: "/home", label: "홈", Icon: IconHome, isActive: (pathname: string) => homePaths.has(pathname)},
   {to: "/map", label: "지도", Icon: IconMap, isActive: (pathname: string) => pathname === "/map"},
   {to: "/store", label: "스토어", Icon: IconStore, isActive: (pathname: string) => pathname === "/store"},
-  {to: "/settings", label: "스토리북", Icon: IconStorybook, isActive: (pathname: string) => pathname === "/settings" || pathname === "/storybook-episode"},
+  {to: "/storybook", label: "스토리북", Icon: IconStorybook, isActive: (pathname: string) => pathname === "/storybook" || pathname === "/storybook-episode"},
   {to: "/search", label: "검색", Icon: IconSearch, isActive: (pathname: string) => pathname === "/search"},
 ] as const;
 

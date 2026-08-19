@@ -1,5 +1,6 @@
 export * from "./Start";
 export * from "./Home";
+export * from "./DogDetail";
 export * from "./MyProducts";
 export * from "./ProductDetail";
 export * from "./ProductPhoto";
@@ -8,7 +9,7 @@ export * from "./ProductAdd";
 export * from "./NumberInput";
 export * from "./Store";
 export * from "./Map";
-export * from "./Settings";
 export * from "./Search";
 export * from "./StorybookEpisode";
+export * from "./Storybook";
 export * from "./NotFound";

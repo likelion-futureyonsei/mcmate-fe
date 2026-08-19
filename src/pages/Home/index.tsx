@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 
-import {ProfileBottomSheet} from "@/components/ProfileBottomSheet";
+import {ProfileBottomSheet, ProfileHotspot} from "@/components";
 
 import styles from "./index.module.scss";
 
@@ -10,8 +10,10 @@ export function Home() {
 
   return (
     <section className={styles.page} aria-label="home page">
-      <img className={styles.reference} src="/ref-home-new-clean.svg?v=home-20260817-clean" alt="" aria-hidden="true" />
-      <button className={styles.profileHotspot} type="button" aria-label="프로필 메뉴 열기" onClick={() => setIsProfileOpen(true)} />
+      <img className={styles.reference} src="/ref-home-new-clean.svg?v=home-20260820-dog-box" alt="" aria-hidden="true" />
+      <img className={styles.dogBox} src="/home-dog-box.svg" alt="" aria-hidden="true" />
+      <ProfileHotspot onClick={() => setIsProfileOpen(true)} />
+      <Link className={styles.dogHotspot} to="/dog-detail" aria-label="강아지 상세 화면 보기" />
       <Link className={styles.writeHotspot} to="/product-write" aria-label="글쓰기" />
       <Link className={styles.firstProductCardHotspot} to="/product-detail" aria-label="첫 번째 제품 상세 보기" />
       <Link

@@ -3,6 +3,7 @@ import {createBrowserRouter} from "react-router-dom";
 import {Layout} from "@/components";
 
 import {
+  DogDetail,
   Home,
   Map,
   MyProducts,
@@ -13,9 +14,9 @@ import {
   ProductPhoto,
   ProductWrite,
   Search,
-  Settings,
   Start,
   StorybookEpisode,
+  Storybook,
   Store,
 } from "@/pages";
 
@@ -28,6 +29,7 @@ export const useRouter = () =>
       children: [
         {index: true, element: <Start />},
         {path: "home", element: <Home />},
+        {path: "dog-detail", element: <DogDetail />},
         {path: "my-products", element: <MyProducts />},
         {path: "product-detail", element: <ProductDetail />},
         {path: "product-photo", element: <ProductPhoto />},
@@ -36,7 +38,7 @@ export const useRouter = () =>
         {path: "number-input", element: <NumberInput />},
         {path: "store", element: <Store />},
         {path: "map", element: <Map />},
-        {path: "settings", element: <Settings />},
+        {path: "storybook", element: <Storybook />},
         {path: "storybook-episode", element: <StorybookEpisode />},
         {path: "search", element: <Search />},
       ],
