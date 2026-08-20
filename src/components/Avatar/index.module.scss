@@ -27,6 +27,8 @@
   /* the frame crops the centre half of the portrait */
   object-fit: cover;
   transform: scale(2);
+  bottom: 18px;
+  position: relative;
 }
 
 .ringInner {
