@@ -79,6 +79,11 @@
   background-size: cover;
   box-shadow: 0.2rem 0.4rem 0.4rem rgba(0, 0, 0, 0.15);
   -webkit-tap-highlight-color: transparent;
+
+  > span {
+    bottom: 24px;
+    position: relative;
+  }
 }
 
 /* selected product keeps its badge in place, so the stroke eats the padding */
