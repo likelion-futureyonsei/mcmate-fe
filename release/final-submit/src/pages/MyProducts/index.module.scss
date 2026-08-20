@@ -1,0 +1,242 @@
+﻿.page {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  min-height: 844px;
+  overflow: hidden;
+  color: #000000;
+  background-image: url("@/assets/images/my-products-bg.png");
+  background-repeat: no-repeat;
+  background-size: 418px 874px;
+  background-position: 0 -15px;
+}
+
+.reference {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 390px;
+  height: 844px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.back {
+  position: absolute;
+  top: 47px;
+  left: 16px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  color: #000000;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1) !important;
+  text-decoration: none;
+
+  svg {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.actions {
+  position: absolute;
+  top: 47px;
+  right: 16px;
+  z-index: 3;
+  width: 100px;
+  height: 44px;
+
+  svg {
+    display: block;
+    width: 100px;
+    height: 44px;
+  }
+}
+
+.addHotspot,
+.menuHotspot {
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  text-decoration: none;
+}
+
+.addHotspot {
+  left: 0;
+}
+
+.menuHotspot {
+  right: 1px;
+}
+
+.title {
+  position: absolute;
+  top: 108px;
+  left: 19px;
+  margin: 0;
+  font-size: 31px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.productLink {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  text-decoration: none;
+}
+
+.backpackLink {
+  top: 170px;
+  left: 36px;
+  width: 120px;
+  height: 214px;
+}
+
+.backpack,
+.beltbag,
+.weekender,
+.phone,
+.shoes,
+.card {
+  position: absolute;
+  display: block;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
+.backpack {
+  top: 152px;
+  left: 21px;
+  width: 145px;
+  height: 180px;
+}
+
+.beltbag {
+  top: 178px;
+  left: 154px;
+  width: 215px;
+  height: 91px;
+}
+
+.weekender {
+  top: 317px;
+  left: 117px;
+  width: 272px;
+  height: 203px;
+}
+
+.phone {
+  top: 367px;
+  left: -3px;
+  width: 146px;
+  height: 162px;
+}
+
+.shoes {
+  top: 560px;
+  left: 163px;
+  width: 222px;
+  height: 105px;
+}
+
+.card {
+  top: 611px;
+  left: 35px;
+  width: 168px;
+  height: 168px;
+  opacity: 0.85;
+}
+
+.caption {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  color: #000000;
+  text-align: center;
+
+  strong {
+    font-size: 13.5px;
+    font-weight: 400;
+    line-height: 1.22;
+    letter-spacing: 0;
+  }
+}
+
+.progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.boxIcon {
+  position: relative;
+  display: inline-block;
+  width: 13px;
+  height: 11px;
+  box-sizing: border-box;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+
+  &::before {
+    position: absolute;
+    top: -5px;
+    left: 2px;
+    width: 7px;
+    height: 4px;
+    border: 2px solid currentColor;
+    border-bottom: 0;
+    border-radius: 2px 2px 0 0;
+    content: "";
+  }
+}
+
+.backpackCaption {
+  top: 334px;
+  left: 30px;
+  width: 127px;
+}
+
+.beltbagCaption {
+  top: 278px;
+  left: 190px;
+  width: 180px;
+}
+
+.phoneCaption {
+  top: 539px;
+  left: 16px;
+  width: 134px;
+}
+
+.weekenderCaption {
+  top: 529px;
+  left: 191px;
+  width: 190px;
+}
+
+
+
+
+
+
+

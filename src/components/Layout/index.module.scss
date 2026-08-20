@@ -11,6 +11,10 @@
   overflow: hidden;
 }
 
+.transparentApp {
+  background-color: transparent;
+}
+
 .hotspotToggle {
   position: absolute;
   top: 12px;
@@ -35,6 +39,10 @@
   min-height: 0;
   overflow: hidden;
   background: #ffffff;
+}
+
+.transparentContent {
+  background: transparent;
 }
 
 .scrollContent {

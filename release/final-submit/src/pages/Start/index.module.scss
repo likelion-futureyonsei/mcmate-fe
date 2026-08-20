@@ -1,0 +1,249 @@
+.page {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  min-height: 844px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.splash {
+  background-image: url("../../assets/images/product-write-bg.png");
+  background-size: 418px 874px;
+  background-position: 0 -15px;
+  background-repeat: no-repeat;
+}
+
+.signup,
+.loading {
+  background-image: url("../../assets/images/start-bg.png");
+  background-size: 418px 874px;
+  background-position: 0 -15px;
+  background-repeat: no-repeat;
+}
+
+.reference {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 390px;
+  height: 844px;
+  display: block;
+  clip-path: inset(40px 0 0 0);
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.signupForm {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  &::before,
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+  }
+
+  &::before {
+    background-image: url("../../assets/images/start-bg.png");
+    background-size: 418px 874px;
+    background-position: 0 -15px;
+    background-repeat: no-repeat;
+    filter: blur(10px);
+    transform: scale(1.04);
+  }
+
+  &::after {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.logo {
+  position: absolute;
+  z-index: 1;
+  top: 180px;
+  left: 84px;
+  width: 222px;
+  height: 45px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.authField {
+  position: absolute;
+  z-index: 1;
+  left: 20.5px;
+  box-sizing: border-box;
+  width: 349px;
+  height: 43px;
+  padding: 0 36px 2px 10px;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 21.5px;
+  background: rgba(255, 255, 255, 0.75);
+  appearance: none;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+  outline: 0;
+
+  &::placeholder {
+    color: #8a8a8d;
+    opacity: 1;
+  }
+}
+
+.authField:nth-of-type(1) {
+  top: 335.5px;
+  padding-bottom: 3px;
+}
+
+.authField:nth-of-type(2) {
+  top: 389.5px;
+}
+
+.passwordHintIcon {
+  position: absolute;
+  top: 403px;
+  right: 32px;
+  z-index: 2;
+  width: 16px;
+  height: 16px;
+  background-color: #000000;
+  mask: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.00497 15.9901C3.58638 15.9901 9.53674e-07 12.4136 9.53674e-07 7.99504C9.53674e-07 3.57648 3.58638 0 8.00497 0C12.4136 0 16 3.57648 16 7.99504C16 12.4136 12.4136 15.9901 8.00497 15.9901ZM8.00497 14.4842C11.5913 14.4842 14.4842 11.5814 14.4842 7.99504C14.4842 4.40866 11.5913 1.50589 8.00497 1.50589C4.41859 1.50589 1.51579 4.40866 1.51579 7.99504C1.51579 11.5814 4.41859 14.4842 8.00497 14.4842Z' fill='black'/%3E%3Cpath d='M8.01513 9.40175C7.58913 9.40175 7.35135 9.16398 7.34145 8.71815L7.21265 4.65624C7.21265 4.21043 7.5594 3.88348 8.02503 3.88348C8.49066 3.88348 8.82751 4.20051 8.81761 4.64634L8.69871 8.71815C8.68881 9.16398 8.45104 9.40175 8.01513 9.40175ZM8.01513 11.9974C7.52968 11.9974 7.10367 11.611 7.10367 11.1256C7.10367 10.6302 7.51978 10.2538 8.01513 10.2538C8.50058 10.2538 8.91669 10.6401 8.91669 11.1256C8.91669 11.6011 8.49066 11.9974 8.01513 11.9974Z' fill='black'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.signupButton {
+  position: absolute;
+  z-index: 1;
+  top: 453.5px;
+  left: 20.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 349px;
+  height: 43px;
+  padding: 0 0 2px;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 21.5px;
+  background: rgba(255, 255, 255, 0.75);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.loginHelp,
+.privacy {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  display: inline-flex;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #000000;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 1px;
+  white-space: nowrap;
+  cursor: pointer;
+  transform: translateX(-50%);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.loginHelp {
+  top: 526px;
+
+  &::before {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 2px;
+    background-color: #000000;
+    content: "";
+    mask: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.99349 13.987C10.8586 13.987 13.9957 10.8585 13.9957 6.99349C13.9957 3.12845 10.8586 0 6.99349 0C3.1371 0 0 3.12845 0 6.99349C0 10.8585 3.1371 13.987 6.99349 13.987ZM6.99349 12.6698C3.8564 12.6698 1.3259 10.1306 1.3259 6.99349C1.3259 3.85639 3.8564 1.31724 6.99349 1.31724C10.1306 1.31724 12.6698 3.85639 12.6698 6.99349C12.6698 10.1306 10.1306 12.6698 6.99349 12.6698Z' fill='black'/%3E%3Cpath d='M6.85469 8.41467C7.24465 8.41467 7.47864 8.17202 7.47864 7.8687C7.47864 7.85138 7.47864 7.83404 7.47864 7.81672C7.47864 7.45274 7.70396 7.21875 8.16326 6.91544C8.80455 6.49948 9.32451 6.10084 9.32451 5.2429C9.32451 4.04698 8.25858 3.44037 7.08 3.44037C5.88409 3.44037 5.09549 3.97766 4.8875 4.5756C4.84418 4.69693 4.81818 4.81826 4.81818 4.93958C4.81818 5.27756 5.09549 5.45955 5.3468 5.45955C5.60677 5.45955 5.76276 5.3469 5.91009 5.16491L6.05742 4.99158C6.35207 4.62761 6.65537 4.48028 7.028 4.48028C7.59997 4.48028 7.97261 4.8096 7.97261 5.30356C7.97261 5.76286 7.67797 5.97085 7.09734 6.36949C6.62938 6.69879 6.23074 7.06276 6.23074 7.75605C6.23074 7.76472 6.23074 7.79072 6.23074 7.79938C6.23074 8.20668 6.44739 8.41467 6.85469 8.41467ZM6.83735 10.4945C7.25333 10.4945 7.62597 10.1565 7.62597 9.73191C7.62597 9.29861 7.26199 8.96929 6.83735 8.96929C6.40405 8.96929 6.04008 9.30727 6.04008 9.73191C6.04008 10.1479 6.41273 10.4945 6.83735 10.4945Z' fill='black'/%3E%3C/svg%3E") center / contain no-repeat;
+    text-decoration: none;
+    vertical-align: -2px;
+  }
+}
+
+.privacy {
+  top: 663px;
+}
+
+.copyright {
+  position: absolute;
+  top: 729px;
+  left: 0;
+  z-index: 1;
+  width: 390px;
+  margin: 0;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  text-align: center;
+}
+
+.progress {
+  position: absolute;
+  top: 734px;
+  left: 45px;
+  z-index: 2;
+  width: 300px;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: transparent;
+
+  span {
+    display: block;
+    width: 300px;
+    height: 5px;
+    border-radius: 999px;
+    background: #000000;
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: fillProgress 5s linear forwards;
+  }
+}
+
+.loadingText {
+  position: absolute;
+  top: 750px;
+  left: 0;
+  z-index: 2;
+  width: 390px;
+  margin: 0;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+
+@keyframes fillProgress {
+  to {
+    transform: scaleX(1);
+  }
+}

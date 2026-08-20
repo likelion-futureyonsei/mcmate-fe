@@ -1,0 +1,184 @@
+.page {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  min-height: 844px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.reference {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 390px;
+  height: 844px;
+  display: block;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
+.characterImage {
+  position: absolute;
+  bottom: 372px;
+  left: 195.5px;
+  z-index: 1;
+  display: block;
+  width: 235px;
+  height: 235px;
+  object-fit: contain;
+  transform-origin: center bottom;
+  pointer-events: none;
+  user-select: none;
+}
+
+.colorScrollFrame {
+  position: absolute;
+  top: 562px;
+  left: 80px;
+  z-index: 2;
+  width: 231px;
+  height: 115px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.colorScrollTrack {
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  padding: 16px 10px 8px;
+}
+
+.colorCard {
+  flex: 0 0 auto;
+  display: block;
+  width: 65px;
+  height: 83px;
+  padding: 3px;
+  border: 0;
+  border-radius: 4px;
+  background: #f7f7f7;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.colorSwatch {
+  display: block;
+  width: 59px;
+  height: 77px;
+  border-radius: 4px;
+}
+
+.selectedColorCard {
+  box-shadow:
+    2px 4px 4px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 3px #b65408;
+}
+
+.selectedCardBorder {
+  position: absolute;
+  top: 577px;
+  z-index: 4;
+  display: block;
+  width: 65px;
+  height: 83px;
+  box-sizing: border-box;
+  border: 3px solid #b65408;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.colorScrollIndicator {
+  position: absolute;
+  top: 667px;
+  left: 180px;
+  z-index: 2;
+  width: 30px;
+  height: 2px;
+  border-radius: 999px;
+  background: #b4b4b4;
+  pointer-events: none;
+}
+
+.colorScrollThumb {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.doneHotspot,
+.firstCardHotspot,
+.secondCardHotspot,
+.thirdCardHotspot,
+.firstTabHotspot,
+.secondTabHotspot,
+.thirdTabHotspot {
+  position: absolute;
+  z-index: 3;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.firstCardHotspot,
+.secondCardHotspot,
+.thirdCardHotspot {
+  top: 577px;
+  width: 65px;
+  height: 83px;
+  border-radius: 4px;
+}
+
+.firstCardHotspot {
+  left: 90px;
+}
+
+.secondCardHotspot {
+  left: 163px;
+}
+
+.thirdCardHotspot {
+  left: 236px;
+}
+
+.doneHotspot {
+  top: 47px;
+  left: 329px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.firstTabHotspot,
+.secondTabHotspot,
+.thirdTabHotspot {
+  top: 526px;
+  width: 50px;
+  height: 37px;
+  border-radius: 6px 6px 0 0;
+}
+
+.firstTabHotspot {
+  left: 116px;
+}
+
+.secondTabHotspot {
+  left: 171px;
+}
+
+.thirdTabHotspot {
+  left: 226px;
+}

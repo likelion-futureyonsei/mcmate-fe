@@ -224,5 +224,15 @@ dist/*
 
 # Codex/local preview artifacts
 .codex-*.png
+.codex-extracted/
 .codex-vite-launcher.mjs
 .pnpm-store/
+
+# Nested package manager/dev-server artifacts
+**/.yarn/.vite/
+**/.yarn/cache/
+**/.yarn/unplugged/
+release/final-submit/.yarn/
+**/node_modules/
+**/.pnp.*
+**/pnpm-lock.yaml

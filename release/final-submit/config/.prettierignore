@@ -1,0 +1,12 @@
+*.yarn*
+.pnp*
+*dist*
+*yarn*
+*.husky*
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.gif
+*.woff
+*.woff2

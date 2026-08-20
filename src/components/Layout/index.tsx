@@ -7,14 +7,18 @@ import {TeamBottomNav} from "@/components/TeamBottomNav";
 import styles from "./index.module.scss";
 
 export const Layout = () => {
-  const {pathname} = useLocation();
+  const {pathname, state} = useLocation();
   const [showAllHotspots, setShowAllHotspots] = useState(true);
+  const routeState = state as {hideBottomNav?: boolean} | null;
   const isScrollablePage =
     pathname !== "/" && pathname !== "/store" && pathname !== "/product-write" && pathname !== "/number-input";
   const isStartPage = pathname === "/";
-  const hasBottomNav = !pathname.startsWith("/product-add") && !pathname.startsWith("/number-input");
+  const isTransparentPage = pathname.startsWith("/product-add");
+  const hasBottomNav =
+    !pathname.startsWith("/product-add") && !pathname.startsWith("/number-input") && !routeState?.hideBottomNav;
   const statusBarVariant = pathname === "/home" ? "light" : "dark";
-  const appClassName = `${styles.app} ${showAllHotspots ? styles.showAllHotspots : ""}`;
+  const appClassName = `${styles.app} ${isTransparentPage ? styles.transparentApp : ""} ${showAllHotspots ? styles.showAllHotspots : ""}`;
+  const contentClassName = `${styles.content} ${isScrollablePage && !isStartPage ? styles.scrollContent : ""} ${isTransparentPage ? styles.transparentContent : ""}`;
 
   return (
     <div className={appClassName}>
@@ -29,7 +33,7 @@ export const Layout = () => {
         {showAllHotspots ? "클릭박스 ON" : "클릭박스 OFF"}
       </button>
       {!isStartPage && <StatusBar variant={statusBarVariant} />}
-      <main className={`${styles.content} ${isScrollablePage && !isStartPage ? styles.scrollContent : ""}`}>
+      <main className={contentClassName}>
         <Outlet />
       </main>
       {hasBottomNav && !isStartPage && <TeamBottomNav />}
