@@ -1,3 +1,4 @@
+import {useEffect, useRef} from "react";
 import {Link} from "react-router-dom";
 
 import {
@@ -20,6 +21,46 @@ const scanned = {
 };
 
 export function QrRegister() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video || !navigator.mediaDevices?.getUserMedia) {
+      return;
+    }
+
+    let stream: MediaStream | null = null;
+    let cancelled = false;
+
+    const startCamera = async () => {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: {facingMode: {ideal: "environment"}},
+          audio: false,
+        });
+
+        if (cancelled) {
+          stream.getTracks().forEach((track) => track.stop());
+          return;
+        }
+
+        video.srcObject = stream;
+        await video.play();
+      } catch {
+        stream?.getTracks().forEach((track) => track.stop());
+      }
+    };
+
+    void startCamera();
+
+    return () => {
+      cancelled = true;
+      stream?.getTracks().forEach((track) => track.stop());
+      video.srcObject = null;
+    };
+  }, []);
+
   return (
     <Screen
       label="제품 QR 등록"
@@ -27,6 +68,15 @@ export function QrRegister() {
       flush
       className={styles.page}
     >
+      <video
+        ref={videoRef}
+        className={styles.camera}
+        autoPlay
+        muted
+        playsInline
+        aria-hidden="true"
+      />
+
       <TopBar
         className={styles.topBar}
         hideBack
