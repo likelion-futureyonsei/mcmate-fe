@@ -1,0 +1,119 @@
+.page {
+  /* the sheet is docked to the bottom of the frame */
+  --screen-pt: 5.5rem;
+  --screen-pb: 0rem;
+}
+
+/* rounded sheet that carries the whole settings list */
+.sheet {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 2.1rem 2rem 15rem;
+  border-radius: 5rem 5rem 0 0;
+  background: #f8f8f8;
+}
+
+.header {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.title {
+  margin-left: -0.2rem;
+  letter-spacing: -0.068rem;
+}
+
+.close {
+  margin: 0.4rem 0.3rem 0 0;
+}
+
+.closeIcon {
+  width: 1.6005rem;
+  height: 1.6rem;
+}
+
+/* profile row */
+.account {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 2.7rem 0 0 -0.3rem;
+  color: #000000;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.accountText {
+  display: flex;
+  flex-direction: column;
+}
+
+.accountName {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.044rem;
+}
+
+.accountHint {
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.034rem;
+  color: #727272;
+}
+
+.chevron {
+  flex: none;
+  width: 0.7874rem;
+  height: 1.4rem;
+  margin-left: auto;
+  color: #89898d;
+}
+
+.accountChevron {
+  width: 0.8436rem;
+  height: 1.5rem;
+}
+
+/* grouped list */
+.group {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  margin-top: 3.4rem;
+}
+
+.groupHeading {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.044rem;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  height: 5rem;
+  padding-top: 1.2rem;
+  border-bottom: 0.1rem solid #e7e7e8;
+  color: #000000;
+  text-decoration: none;
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.034rem;
+  -webkit-tap-highlight-color: transparent;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.rowChevron {
+  margin-top: 0.3rem;
+}

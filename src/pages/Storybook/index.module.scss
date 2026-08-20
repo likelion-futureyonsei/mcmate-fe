@@ -1,0 +1,106 @@
+.page {
+  --screen-pb: 12.3rem;
+}
+
+.actionPill {
+  width: 10rem;
+}
+
+.shareIcon {
+  width: 1.8354rem;
+  height: 2.3332rem;
+}
+
+.linesIcon {
+  width: 2.2rem;
+  height: 1.3261rem;
+}
+
+.title {
+  margin: 0.7rem 0 0 -0.2rem;
+  letter-spacing: -0.068rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.03rem;
+  color: #8f8f92;
+}
+
+/* segmented switch between the personal and the regional storybook */
+.tabs {
+  display: flex;
+  flex: none;
+  align-self: flex-start;
+  width: 26.1rem;
+  margin-top: 4rem;
+  padding: 0.3rem;
+  border: 0.1rem solid #000000;
+  border-radius: 1.95rem;
+}
+
+.tab {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 3.3rem;
+  border-radius: 2.2rem;
+  color: #000000;
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tabActive {
+  color: #ffffff;
+  background: #000000;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 15rem);
+  gap: 3rem 2rem;
+  justify-content: center;
+  margin-top: 2.7rem;
+}
+
+/* the like control stacks over the artwork without leaving flow */
+.card {
+  display: grid;
+  grid-template-columns: 100%;
+  height: 20rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0.2rem 0.4rem 1.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card > * {
+  grid-area: 1 / 1;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.like {
+  justify-self: end;
+  align-self: end;
+  margin: 1.5rem;
+  color: #ffffff;
+  /* keeps the white outline readable over pale artwork */
+  filter: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.4));
+}
+
+.heartIcon {
+  display: block;
+  width: 2.305rem;
+  height: 2.1rem;
+}

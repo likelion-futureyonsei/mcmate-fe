@@ -4,11 +4,16 @@ import {BottomNav} from "@/components/BottomNav";
 
 import styles from "./index.module.scss";
 
-export const Layout = () => {
+type LayoutProps = {
+  /** Frames presented modally (onboarding, scanner, settings) carry no tab bar. */
+  nav?: boolean;
+};
+
+export const Layout = ({nav = true}: LayoutProps) => {
   return (
     <div className={styles.app}>
       <Outlet />
-      <BottomNav />
+      {nav ? <BottomNav /> : null}
     </div>
   );
 };

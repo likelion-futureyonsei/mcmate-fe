@@ -3,19 +3,19 @@ import {Glass} from "@samasante/liquid-glass";
 
 import styles from "./index.module.scss";
 import {
-  IconHome,
-  IconMemory,
-  IconSearch,
-  IconStore,
-  IconUser,
+  IconNavHome,
+  IconNavMap,
+  IconNavSearch,
+  IconNavStore,
+  IconNavStorybook,
 } from "@/assets/icons";
 
 const items = [
-  {to: "/", label: "홈", Icon: IconHome},
-  {to: "/memories", label: "추억", Icon: IconMemory},
-  {to: "/store", label: "스토어", Icon: IconStore},
-  {to: "/settings", label: "설정", Icon: IconUser},
-  {to: "/search", label: "검색", Icon: IconSearch},
+  {to: "/", label: "홈", Icon: IconNavHome},
+  {to: "/map", label: "지도", Icon: IconNavMap},
+  {to: "/store", label: "스토어", Icon: IconNavStore},
+  {to: "/storybook", label: "스토리북", Icon: IconNavStorybook},
+  {to: "/search", label: "검색", Icon: IconNavSearch},
 ] as const;
 
 export const BottomNav = () => {

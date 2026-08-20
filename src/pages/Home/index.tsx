@@ -1,42 +1,105 @@
 import {Link} from "react-router-dom";
+import {Glass} from "@samasante/liquid-glass";
+
+import {IconBag, IconEdit, IconMail} from "@/assets/icons";
+import {
+  BgHome,
+  ProductBelt,
+  ProductOttomar,
+  ProductStark,
+} from "@/assets/images";
+import {
+  Avatar,
+  CountBadge,
+  GlassButton,
+  Logo,
+  Screen,
+  ScrollHint,
+} from "@/components";
 
 import styles from "./index.module.scss";
-import {Logo} from "@/assets/images";
+
+const products = [
+  {
+    id: "stark",
+    name: "Stark 사이드 스터드 비세토스 백팩",
+    image: ProductStark,
+    owned: 5,
+    total: 50,
+  },
+  {
+    id: "belt",
+    name: "비세토스 프루스튼 벨트백",
+    image: ProductBelt,
+    owned: 3,
+    total: 50,
+  },
+  {
+    id: "ottomar",
+    name: "Ottomar 비세토스 위켄더",
+    image: ProductOttomar,
+    owned: 35,
+    total: 100,
+  },
+];
+
+/** Memories recorded across the whole collection, not just the shelf. */
+const collection = {owned: 72, total: 280};
 
 export function Home() {
   return (
-    <section className={styles.page} aria-label="home page">
-      <header className={styles.brand}>
-        <img src={Logo} alt="" />
+    <Screen label="홈" background={BgHome} tone="dark" className={styles.page}>
+      <header className={styles.header}>
+        <Logo className={styles.logo} />
+
+        <div className={styles.tools}>
+          <Link
+            to="/settings"
+            className={styles.avatarLink}
+            aria-label="계정 정보"
+          >
+            <Avatar />
+          </Link>
+
+          <GlassButton label="알림" to="/storybook">
+            <IconMail className={styles.mailIcon} />
+          </GlassButton>
+
+          <GlassButton label="추억 작성" to="/memory-write">
+            <IconEdit className={styles.editIcon} />
+          </GlassButton>
+        </div>
       </header>
 
-      <div className={styles.hero}>
-        <p className={styles.eyebrow}>My Archive</p>
-        <h1>나의 MCM을 기록하고 확인하세요</h1>
-      </div>
+      <div className={styles.bottom}>
+        <Glass className={styles.shelf}>
+          <ul className={styles.tiles}>
+            {products.map((product, index) => (
+              <li key={product.id}>
+                <Link
+                  to="/product-memories"
+                  aria-label={product.name}
+                  className={`${styles.tile} ${index === 0 ? styles.tileActive : ""}`}
+                  style={{backgroundImage: `url(${product.image})`}}
+                >
+                  <CountBadge owned={product.owned} total={product.total} />
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-      <Link className={styles.productCard} to="/my-products">
-        <div className={styles.bagPreview}>
-          <span className={styles.handle} />
-          <span className={styles.body} />
-          <span className={styles.badge}>MCM</span>
-        </div>
-        <div className={styles.productInfo}>
-          <strong>나의 제품</strong>
-          <span>72/280</span>
-        </div>
-      </Link>
+          <ScrollHint />
+        </Glass>
 
-      <div className={styles.summary}>
-        <article>
-          <strong>17</strong>
-          <span>추억</span>
-        </article>
-        <article>
-          <strong>5</strong>
-          <span>등록 대기</span>
-        </article>
+        <div className={styles.total}>
+          <GlassButton to="/my-products" label="나의 제품">
+            <IconBag className={styles.totalIcon} />
+          </GlassButton>
+          <span className={styles.totalValue}>
+            {collection.owned}/{collection.total}
+          </span>
+        </div>
       </div>
-    </section>
+    </Screen>
   );
 }

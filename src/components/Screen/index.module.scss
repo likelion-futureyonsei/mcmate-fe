@@ -1,0 +1,61 @@
+.screen {
+  /* single cell so the backdrop and the content stack without leaving flow */
+  display: grid;
+  grid-template-columns: 100%;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--screen-bg-color, #fbf9f2);
+  background-repeat: no-repeat;
+  background-position: var(--screen-bg-position, center top);
+  background-size: var(--screen-bg-size, cover);
+}
+
+.screen > * {
+  grid-area: 1 / 1;
+}
+
+.backdrop {
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  /* the character frames show the home artwork softened and mirrored */
+  filter: blur(var(--screen-backdrop-blur, 2rem));
+  transform: scaleX(var(--screen-backdrop-flip, -1));
+}
+
+.content {
+  /*
+   * The backdrop's `filter` promotes it to a stacking context, which would
+   * otherwise paint over plain (non-promoted) content. Give the content its own
+   * stacking context so it always sits above the artwork.
+   */
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: var(--screen-align, stretch);
+  min-height: 100vh;
+  /* top padding lands the action row on y=47 of the 390x844 frame */
+  padding: var(--screen-pt, 4.7rem) var(--screen-px, 2rem)
+    var(--screen-pb, 10.4rem);
+  /* optional veil laid over the backdrop, under the interface */
+  background: var(--screen-veil, transparent);
+}
+
+.bleed {
+  --screen-px: 0rem;
+}
+
+.flush {
+  --screen-pb: 4rem;
+}
+
+.dark {
+  color: #000000;
+}
+
+.light {
+  color: #ffffff;
+}

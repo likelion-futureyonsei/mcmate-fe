@@ -1,0 +1,116 @@
+.page {
+  --screen-pt: 0rem;
+  --screen-pb: 10.4rem;
+}
+
+.hero {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  height: 42.3rem;
+  padding: 4.7rem 2rem 0;
+  background: #eeeeef;
+}
+
+.topBar {
+  align-self: stretch;
+}
+
+/*
+ * Two prints stacked corner to corner. Grid stacking keeps both in flow, with
+ * the back print anchored top-right and the front one bottom-left.
+ */
+.prints {
+  display: grid;
+  grid-template-columns: 100%;
+  flex: none;
+  width: 20.259rem;
+  height: 25.791rem;
+  margin: 0.514rem 0 0 0.86rem;
+}
+
+.prints > * {
+  grid-area: 1 / 1;
+}
+
+.printBack {
+  justify-self: end;
+  align-self: start;
+  width: 19.159rem;
+  height: 24.673rem;
+  border-radius: 0.3rem;
+  object-fit: cover;
+  box-shadow: 0.2rem 0.4rem 1.2rem 0.2rem rgba(0, 0, 0, 0.25);
+}
+
+.printFront {
+  justify-self: start;
+  align-self: end;
+  width: 19.341rem;
+  height: 24.878rem;
+  border-radius: 0.7rem;
+  object-fit: cover;
+  box-shadow: 0.2rem 0.4rem 1.2rem 0.2rem rgba(0, 0, 0, 0.25);
+}
+
+.meta {
+  margin-top: 0.595rem;
+}
+
+.personIcon {
+  flex: none;
+  width: 1.4009rem;
+  height: 1.4rem;
+}
+
+.pinIcon {
+  flex: none;
+  width: 0.4778rem;
+  height: 1.3rem;
+}
+
+.calendarIcon {
+  flex: none;
+  width: 1.4461rem;
+  height: 1.3446rem;
+}
+
+.body {
+  padding: 0 2rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2.3rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.04rem;
+}
+
+.like {
+  display: flex;
+  margin-right: 1.195rem;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.heartIcon {
+  width: 2.305rem;
+  height: 2.1rem;
+}
+
+.text {
+  width: 35.3rem;
+  margin-top: 0.9rem;
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.034rem;
+}

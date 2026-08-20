@@ -1,0 +1,119 @@
+.page {
+  --screen-pb: 9.3rem;
+  --screen-pt: 0rem;
+}
+
+/* the grey plate behind the photograph and its caption strip */
+.hero {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  height: 42.3rem;
+  padding: 4.7rem 2rem 0;
+  background: #eeeeef;
+}
+
+.topBar {
+  align-self: stretch;
+}
+
+.photo {
+  flex: none;
+  width: 18.023rem;
+  height: 23.9rem;
+  margin-top: 0.9rem;
+  border-radius: 0.7rem;
+  object-fit: cover;
+  box-shadow: 0.2rem 0.4rem 1.2rem 0.2rem rgba(0, 0, 0, 0.25);
+}
+
+.meta {
+  margin-top: 2.1rem;
+}
+
+.shareIcon {
+  width: 1.8094rem;
+  height: 2.3rem;
+}
+
+.orderIcon {
+  width: 1.0183rem;
+  height: 1.1rem;
+}
+
+.pinIcon {
+  width: 0.4778rem;
+  height: 1.3rem;
+}
+
+.calendarIcon {
+  width: 1.4461rem;
+  height: 1.3446rem;
+}
+
+.body {
+  padding: 0 2rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2.3rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.04rem;
+}
+
+.like {
+  display: flex;
+  margin-right: 1.195rem;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.heartIcon {
+  width: 2.305rem;
+  height: 2.1rem;
+}
+
+.text {
+  width: 35.3rem;
+  margin-top: 0.9rem;
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.034rem;
+}
+
+/* the other shots from the same product, scrolled to the current one */
+.filmstrip {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 6.3rem;
+  padding-left: 17.6rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  mask-image: linear-gradient(
+    to right,
+    #000000 0,
+    #000000 calc(100% - 4.2rem),
+    transparent 100%
+  );
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.frame {
+  flex: none;
+  height: 5rem;
+  border-radius: 0.3rem;
+  object-fit: cover;
+}

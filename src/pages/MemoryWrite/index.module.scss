@@ -1,0 +1,163 @@
+.page {
+  --screen-pb: 32.4rem;
+}
+
+.tickIcon {
+  width: 1.8266rem;
+  height: 1.8rem;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 0.9rem;
+}
+
+/* photo drop area */
+.dropzone {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.7rem;
+  height: 20.5rem;
+  border: 0.1rem solid #8a8a8d;
+  border-radius: 0.8rem;
+}
+
+.dropzoneLabel {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.032rem;
+}
+
+.pickers {
+  display: flex;
+  gap: 2rem;
+}
+
+.picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 0.1rem solid #8a8a8d;
+  border-radius: 50%;
+  color: #000000;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pickerIcon {
+  width: 4.4rem;
+  height: 4.4rem;
+}
+
+/* place row: a short text field plus the "use my location" action */
+.placeRow {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.field {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 0.85rem;
+  height: 4.7rem;
+  padding: 0 1.5rem;
+  border: 0.1rem solid #8a8a8d;
+  border-radius: 0.6rem;
+}
+
+.placeField {
+  width: 24rem;
+}
+
+.dateField {
+  align-self: stretch;
+}
+
+.fieldInput {
+  flex: 1;
+  min-width: 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.03rem;
+  color: #000000;
+
+  &::placeholder {
+    color: #8f8f92;
+  }
+}
+
+.pinIcon {
+  flex: none;
+  width: 0.6061rem;
+  height: 1.6486rem;
+}
+
+.calendarIcon {
+  flex: none;
+  width: 1.5536rem;
+  height: 1.4446rem;
+}
+
+.locate {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #000000;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.locateLabel {
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.026rem;
+}
+
+.locateIcon {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+/* note area with its live character counter */
+.note {
+  display: flex;
+  flex-direction: column;
+  height: 6.1rem;
+  padding: 0.8rem 1.4rem;
+  border: 0.1rem solid #8a8a8d;
+  border-radius: 0.6rem;
+}
+
+.noteInput {
+  flex: 1;
+  width: 100%;
+  resize: none;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.024rem;
+  color: #000000;
+
+  &::placeholder {
+    color: #8f8f92;
+  }
+}
+
+.counter {
+  align-self: flex-end;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.024rem;
+  color: #8f8f92;
+}

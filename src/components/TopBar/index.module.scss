@@ -1,0 +1,26 @@
+.bar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  /* pulls the 44px targets out to x=16 of the 390px frame */
+  margin: 0 -0.4rem;
+  min-height: 4.4rem;
+}
+
+.spacer {
+  width: 4.4rem;
+  height: 4.4rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-left: auto;
+}
+
+.backIcon {
+  width: 1.0686rem;
+  height: 1.9rem;
+}

@@ -1,7 +1,17 @@
-.frame {
-  display: block;
-  width: calc(100% + 40px);
-  height: 100%;
-  border: 0;
-  margin: 0 -20px 0 -20px;
+.page {
+  --screen-align: center;
+}
+
+/*
+ * Node 1:1908 (스토어_메인) only carries the paper background and the tab bar —
+ * the catalogue itself is not designed yet.
+ */
+.placeholder {
+  margin: auto 0;
+  color: #8f8f92;
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.034rem;
+  text-align: center;
 }

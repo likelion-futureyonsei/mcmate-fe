@@ -1,0 +1,82 @@
+.page {
+  /* the illustrated map is pinned to the same crop as the frame */
+  --screen-bg-size: 119.7rem 178.4rem;
+  --screen-bg-position: -23.8rem -27.9rem;
+  --screen-px: 0rem;
+}
+
+.header {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.title {
+  margin: 0.2rem 0 0 -0.2rem;
+  letter-spacing: -0.068rem;
+}
+
+.actionPill {
+  width: 15.7rem;
+  margin-right: -0.4rem;
+}
+
+.plusIcon {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.chartIcon {
+  width: 2.2rem;
+  height: 1.9237rem;
+}
+
+.linesIcon {
+  width: 2.2rem;
+  height: 1.3261rem;
+}
+
+/*
+ * Memory pins are anchored to map coordinates, so absolute placement is the
+ * faithful translation — there is no row or column structure to follow.
+ */
+.pins {
+  position: relative;
+  flex: 1;
+}
+
+.pin {
+  position: absolute;
+  top: var(--pin-y);
+  left: var(--pin-x);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pinCard {
+  width: 5.1rem;
+  height: 5.1rem;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+  background: #ffffff;
+}
+
+.pinPhoto {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 0.3rem;
+  object-fit: cover;
+}
+
+/* the pointer tucks under the card, matching the pin silhouette */
+.pinTail {
+  width: 1.45rem;
+  height: 0.9rem;
+  margin-top: -0.29rem;
+  background: #ffffff;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}

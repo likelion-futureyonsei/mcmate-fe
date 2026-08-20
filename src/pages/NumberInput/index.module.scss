@@ -1,113 +1,92 @@
 .page {
-  position: relative;
-  min-height: calc(100vh - 40px);
-  padding: 14px 20px 120px;
-  background: #ffffff;
+  /* the OS keyboard occupies the bottom 322px of the frame */
+  --screen-pb: 33.15rem;
+  --screen-align: center;
 }
 
-.topActions {
+.topBar {
+  align-self: stretch;
+}
+
+.closeIcon {
+  width: 1.6005rem;
+  height: 1.6rem;
+}
+
+.title {
+  margin-top: 2.9rem;
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.034rem;
+  text-align: center;
+}
+
+/* five single-character cells for the engraved serial */
+.code {
   display: flex;
-  justify-content: flex-end;
-  height: 44px;
+  gap: 1rem;
+  margin-top: 6.6rem;
 }
 
-.close {
-  position: relative;
-  width: 44px;
-  height: 44px;
-}
+.cell {
+  width: 3.5rem;
+  height: 4.7rem;
+  border: 0.1rem solid #8a8a8d;
+  border-radius: 0.4rem;
+  color: #000000;
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 4.5rem;
+  text-align: center;
+  text-transform: uppercase;
 
-.close::before,
-.close::after {
-  position: absolute;
-  top: 21px;
-  left: 12px;
-  width: 20px;
-  height: 3px;
-  border-radius: 3px;
-  background: #000000;
-  content: "";
-}
-
-.close::before {
-  transform: rotate(45deg);
-}
-
-.close::after {
-  transform: rotate(-45deg);
-}
-
-.copy {
-  margin-top: 84px;
-
-  h1 {
-    font-size: 24px;
-    font-weight: 900;
-  }
-
-  p {
-    margin-top: 12px;
-    color: #5f6064;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.6;
+  &:focus {
+    border-color: #000000;
+    outline: none;
   }
 }
 
-.form {
-  display: grid;
-  gap: 18px;
-  margin-top: 34px;
-
-  label {
-    display: grid;
-    gap: 10px;
-  }
-
-  span {
-    font-size: 13px;
-    font-weight: 800;
-  }
-
-  input {
-    height: 48px;
-    border-bottom: 2px solid #000000;
-    font-size: 20px;
-    font-weight: 700;
-  }
-
-  a {
-    height: 46px;
-    border-radius: 8px;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 800;
-    text-align: center;
-    text-decoration: none;
-    line-height: 46px;
-    background: #000000;
-  }
+.scan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 6rem;
 }
 
-.keyboard {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 8px 5px;
-  padding: 18px 8px 118px;
-  border-radius: 25px 25px 0 0;
-  background: rgba(230, 233, 237, 0.96);
+.scanIcon {
+  width: 2rem;
+  height: 2.0013rem;
+}
 
-  span {
-    display: grid;
-    place-items: center;
-    height: 43px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.67);
-    font-size: 16px;
-    font-weight: 700;
-  }
+.scanLabel {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.03rem;
+}
+
+.help {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 7.75rem;
+  color: #000000;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.helpIcon {
+  flex: none;
+  width: 1.3996rem;
+  height: 1.3987rem;
+}
+
+.helpLabel {
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.026rem;
+  text-decoration: underline;
+  text-underline-position: from-font;
 }

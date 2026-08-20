@@ -1,0 +1,44 @@
+.avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 5.6523rem;
+  height: 5.6523rem;
+  color: #000000;
+}
+
+/* stack the photo and both rings without taking them out of flow */
+.avatar > * {
+  grid-area: 1 / 1;
+}
+
+.clip {
+  display: grid;
+  place-items: center;
+  width: 4.7827rem;
+  height: 4.7827rem;
+  overflow: hidden;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  /* the frame crops the centre half of the portrait */
+  object-fit: cover;
+  transform: scale(2);
+}
+
+.ringInner {
+  width: 3.3819rem;
+  height: 3.3819rem;
+  border: 0.1rem solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.ringOuter {
+  width: 3.9968rem;
+  height: 3.9968rem;
+  border: 0.2rem solid currentColor;
+  transform: rotate(-45deg);
+}

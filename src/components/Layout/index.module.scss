@@ -1,12 +1,13 @@
 /* Layout Styling */
 
 .app {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 430px;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
   background-color: var(--theme-background);
   box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
-  padding: 0 20px 0 20px;
 }

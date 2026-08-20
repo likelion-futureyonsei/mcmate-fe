@@ -1,0 +1,19 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.icon {
+  flex: none;
+  width: 1.1167rem;
+  height: 1.0305rem;
+}
+
+.value {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.022rem;
+  white-space: nowrap;
+}

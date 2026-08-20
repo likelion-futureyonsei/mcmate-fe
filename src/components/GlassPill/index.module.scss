@@ -1,0 +1,26 @@
+.pill {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  height: 4.4rem;
+  padding: 0 1.2rem 0 1.3rem;
+  border-radius: 2.1rem;
+  color: #000000;
+}
+
+.solid {
+  background: rgba(238, 238, 239, 0.7);
+}
+
+.strong {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.action {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}

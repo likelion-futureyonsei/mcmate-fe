@@ -1,0 +1,97 @@
+.page {
+  --screen-pb: 8.5rem;
+  --screen-align: center;
+}
+
+.topBar {
+  align-self: stretch;
+}
+
+.actionPill {
+  width: 15.7rem;
+}
+
+.editIcon {
+  width: 2.0346rem;
+  height: 2.0317rem;
+}
+
+.shareIcon {
+  width: 1.8354rem;
+  height: 2.3332rem;
+}
+
+.linesIcon {
+  width: 2.2rem;
+  height: 1.3261rem;
+}
+
+/* the cut-out artwork tucks up behind the action row */
+.hero {
+  flex: none;
+  width: 18.5rem;
+  height: 23rem;
+  margin-top: -1.8rem;
+  object-fit: cover;
+}
+
+.name {
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* sibling products, scrolled so the current one sits under the title */
+.swatches {
+  display: flex;
+  gap: 0.5rem;
+  align-self: stretch;
+  margin: 1.95rem -2rem 0;
+  padding-left: 17.2rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* reproduces the paper-coloured fade over the right edge of the rail */
+  mask-image: linear-gradient(
+    to right,
+    #000000 0,
+    #000000 calc(100% - 4.2rem),
+    transparent 100%
+  );
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.swatch {
+  flex: none;
+  width: 4.6rem;
+  height: 5rem;
+  border-radius: 0.3rem;
+  object-fit: cover;
+}
+
+/* three-column masonry of memory photographs */
+.grid {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-self: stretch;
+  margin-top: 2.9rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.photo {
+  display: block;
+  width: 10rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}

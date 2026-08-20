@@ -1,32 +1,86 @@
-import {Link} from "react-router-dom";
+import {useRef, useState, type KeyboardEvent} from "react";
+
+import {IconClose, IconInfo, IconQrScan} from "@/assets/icons";
+import {GlassButton, Screen, TopBar} from "@/components";
 
 import styles from "./index.module.scss";
 
+const CODE_LENGTH = 5;
+
 export function NumberInput() {
+  const [code, setCode] = useState<string[]>(Array(CODE_LENGTH).fill(""));
+  const cells = useRef<(HTMLInputElement | null)[]>([]);
+
+  const handleChange = (index: number, raw: string) => {
+    const value = raw.slice(-1).toUpperCase();
+
+    setCode((current) => {
+      const next = [...current];
+      next[index] = value;
+      return next;
+    });
+
+    if (value && index < CODE_LENGTH - 1) {
+      cells.current[index + 1]?.focus();
+    }
+  };
+
+  const handleKeyDown = (
+    index: number,
+    event: KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.key === "Backspace" && !code[index] && index > 0) {
+      cells.current[index - 1]?.focus();
+    }
+  };
+
   return (
-    <section className={styles.page} aria-label="number input page">
-      <div className={styles.topActions}>
-        <Link to="/product-add" className={styles.close} aria-label="닫기" />
-      </div>
+    <Screen label="제품 번호 입력" className={styles.page}>
+      <TopBar
+        className={styles.topBar}
+        hideBack
+        actions={
+          <GlassButton label="닫기" tint="solid" to="/my-products">
+            <IconClose className={styles.closeIcon} />
+          </GlassButton>
+        }
+      />
 
-      <article className={styles.copy}>
-        <h1>제품 번호를 입력하세요</h1>
-        <p>제품 내부 라벨 또는 보증 카드에 있는 번호를 입력해 주세요.</p>
-      </article>
+      <h1 className={styles.title}>
+        브라스 플레이트에 각인된 번호를
+        <br />
+        입력하여 제품을 등록하세요
+      </h1>
 
-      <form className={styles.form}>
-        <label>
-          <span>제품 번호</span>
-          <input autoFocus placeholder="예: MCM-2026-0001" />
-        </label>
-        <Link to="/my-products">등록하기</Link>
-      </form>
-
-      <div className={styles.keyboard} aria-hidden="true">
-        {"qwertyuiopasdfghjklzxcvbnm".split("").map((key) => (
-          <span key={key}>{key}</span>
+      <div className={styles.code}>
+        {code.map((value, index) => (
+          <input
+            key={index}
+            ref={(node) => {
+              cells.current[index] = node;
+            }}
+            className={styles.cell}
+            value={value}
+            inputMode="text"
+            maxLength={1}
+            aria-label={`번호 ${index + 1}번째 자리`}
+            onChange={(event) => handleChange(index, event.target.value)}
+            onKeyDown={(event) => handleKeyDown(index, event)}
+          />
         ))}
       </div>
-    </section>
+
+      <div className={styles.scan}>
+        <GlassButton label="QR코드 촬영" to="/qr-register" tint="veil">
+          <IconQrScan className={styles.scanIcon} />
+        </GlassButton>
+        <span className={styles.scanLabel}>QR코드 촬영</span>
+      </div>
+
+      <button type="button" className={styles.help}>
+        <IconInfo className={styles.helpIcon} />
+        <span className={styles.helpLabel}>브라스 플레이트란?</span>
+      </button>
+    </Screen>
   );
 }

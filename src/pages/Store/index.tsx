@@ -1,11 +1,11 @@
+import {Screen} from "@/components";
+
 import styles from "./index.module.scss";
 
 export function Store() {
   return (
-    <iframe
-      className={styles.frame}
-      src="https://kr.mcmworldwide.com/ko_KR/home?hidebanner=true"
-      title="MCM Korea Store"
-    />
+    <Screen label="스토어" className={styles.page}>
+      <p className={styles.placeholder}>스토어 준비 중입니다.</p>
+    </Screen>
   );
 }

@@ -1,0 +1,65 @@
+.glass {
+  display: flex !important;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  /* keeps the lens hugging its control instead of stretching in a flex/grid */
+  width: fit-content;
+  height: fit-content;
+}
+
+.hit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  width: 100%;
+  min-width: 4.4rem;
+  height: 4.4rem;
+  border-radius: inherit;
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+/* shapes */
+.circle {
+  border-radius: 50%;
+}
+
+.pill {
+  border-radius: 2.2rem;
+}
+
+.block {
+  border-radius: 0.5rem;
+
+  .hit {
+    height: auto;
+  }
+}
+
+/* tints */
+.subtle {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.strong {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.solid {
+  background: rgba(238, 238, 239, 0.7);
+}
+
+.veil {
+  background: rgba(238, 238, 239, 0.2);
+}
+
+.none {
+  background: transparent;
+}
