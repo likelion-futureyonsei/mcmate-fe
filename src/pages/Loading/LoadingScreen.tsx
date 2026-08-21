@@ -15,7 +15,7 @@ type LoadingScreenProps = {
  */
 export const LoadingScreen = ({
   pending = true,
-  label = "추억 불러오는 중...",
+  label = "에피소드 불러오는 중...",
 }: LoadingScreenProps) => (
   <Loading progress={useProgress(pending)} label={label} />
 );
@@ -25,5 +25,5 @@ export const LoadingScreen = ({
  * in place of the caption, so no screen needs its own error treatment.
  */
 export const ErrorScreen = ({message}: {message: string}) => (
-  <Loading progress={1} label={message} />
+  <Loading progress={1} label={message} hideNav={false} />
 );

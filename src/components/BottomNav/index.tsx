@@ -12,7 +12,7 @@ import {
 
 const items = [
   {to: "/", label: "홈", Icon: IconNavHome},
-  {to: "/map", label: "지도", Icon: IconNavMap},
+  {to: "/map", label: "에피소드", Icon: IconNavMap},
   {to: "/store", label: "스토어", Icon: IconNavStore},
   {to: "/storybook", label: "스토리북", Icon: IconNavStorybook},
   {to: "/search", label: "검색", Icon: IconNavSearch},

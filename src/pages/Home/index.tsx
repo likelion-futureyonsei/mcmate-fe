@@ -22,7 +22,7 @@ export function Home() {
   const {data, error, pending} = useAsync(() => listMyProducts(), []);
 
   if (pending || (!data && !error)) {
-    return <LoadingScreen label="나의 제품 불러오는 중..." />;
+    return <LoadingScreen label="나의 컬렉션 불러오는 중..." />;
   }
 
   if (error) {
@@ -99,7 +99,7 @@ export function Home() {
         </Glass>
 
         <div className={styles.total}>
-          <GlassButton to="/my-products" label="나의 제품">
+          <GlassButton to="/my-products" label="나의 컬렉션">
             <IconBag className={styles.totalIcon} />
           </GlassButton>
           <span className={styles.totalValue}>

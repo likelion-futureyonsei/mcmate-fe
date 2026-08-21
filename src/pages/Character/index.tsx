@@ -14,7 +14,7 @@ import {
   colorOptions,
   defaultSelection,
   patternOptions,
-  preview,
+  previewFor,
   tabs,
   type CharacterTab,
 } from "./options";
@@ -119,7 +119,11 @@ export function Character({tab = "body"}: CharacterProps) {
         </GlassButton>
       </header>
 
-      <img className={styles.preview} src={preview} alt="" />
+      <img
+        className={styles.preview}
+        src={previewFor(selection.doll)}
+        alt=""
+      />
 
       <nav className={styles.tabs} aria-label="캐릭터 편집 항목">
         {tabs.map((item) => (

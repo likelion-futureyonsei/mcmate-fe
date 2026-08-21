@@ -18,8 +18,8 @@ const apiScope: Record<StorybookScope, StorybookScopeType> = {
 };
 
 const tabs: {id: StorybookScope; label: string; to: string}[] = [
-  {id: "collection", label: "나의 컬렉션", to: "/storybook"},
-  {id: "heritage", label: "지역 헤리지티", to: "/storybook/heritage"},
+  {id: "collection", label: "나의 여정", to: "/storybook"},
+  {id: "heritage", label: "브랜드 여정", to: "/storybook/heritage"},
 ];
 
 type StorybookProps = {

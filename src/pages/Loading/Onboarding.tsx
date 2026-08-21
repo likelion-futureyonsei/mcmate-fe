@@ -35,7 +35,7 @@ export function Onboarding() {
   }
 
   if (held || products.pending || !user) {
-    return <LoadingScreen label="추억 불러오는 중..." />;
+    return <LoadingScreen label="에피소드 불러오는 중..." />;
   }
 
   if (!user.character) {

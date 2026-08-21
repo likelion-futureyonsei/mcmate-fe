@@ -75,14 +75,14 @@ export function Search() {
           className={styles.fieldInput}
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="제품, 추억, 스토어 등"
+          placeholder="제품, 에피소드, 스토어 등"
           aria-label="검색어"
         />
       </Glass>
 
       <section className={styles.products}>
         <Link to="/my-products" className={styles.sectionHeading}>
-          <h2 className={styles.headingText}>보유 제품</h2>
+          <h2 className={styles.headingText}>나의 컬렉션</h2>
           <IconChevronRight className={styles.headingChevron} />
         </Link>
 
@@ -112,7 +112,7 @@ export function Search() {
 
       <section className={styles.memories}>
         <Link to="/map" className={styles.sectionHeading}>
-          <h2 className={styles.headingText}>추억</h2>
+          <h2 className={styles.headingText}>에피소드</h2>
           <IconChevronRight className={styles.headingChevron} />
         </Link>
 

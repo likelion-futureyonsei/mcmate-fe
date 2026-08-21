@@ -14,6 +14,8 @@ export type BodyOption = {
   id: string;
   name: string;
   thumb: string;
+  /** Large artwork the frame shows above the picker for this body. */
+  preview: string;
   /** Thumbnail footprint inside the 65x83 tile, in frame pixels. */
   size: {w: number; h: number};
   /** `Character.doll` value this tile saves. */
@@ -46,6 +48,7 @@ export const bodyOptions: BodyOption[] = [
     id: "sitting",
     name: "앉은 자세",
     thumb: CharacterThumb1,
+    preview: Character1,
     size: {w: 50, h: 50},
     doll: "bearbrick",
   },
@@ -53,6 +56,7 @@ export const bodyOptions: BodyOption[] = [
     id: "standing",
     name: "선 자세",
     thumb: Character6,
+    preview: Character6,
     size: {w: 59, h: 59},
     doll: "rabbit",
   },
@@ -60,6 +64,7 @@ export const bodyOptions: BodyOption[] = [
     id: "walking",
     name: "걷는 자세",
     thumb: CharacterThumb10,
+    preview: CharacterThumb10,
     size: {w: 52, h: 68},
     doll: "puppy",
   },
@@ -81,6 +86,14 @@ export const patternOptions: PatternOption[] = [
 
 /** Artwork shown in the large preview above the picker. */
 export const preview = Character1;
+
+/**
+ * The preview follows the selected body, so switching the character kind is
+ * visible straight away instead of only inside the tray. Falls back to the
+ * default artwork for a `doll` the picker has no tile for (`dachshund`).
+ */
+export const previewFor = (doll: DollType | null | undefined) =>
+  bodyOptions.find((option) => option.doll === doll)?.preview ?? preview;
 
 export const tabs: {id: CharacterTab; label: string; to: string}[] = [
   {id: "body", label: "바디", to: "/character/body"},

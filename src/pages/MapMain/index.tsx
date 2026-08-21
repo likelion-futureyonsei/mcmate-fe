@@ -27,7 +27,7 @@ export function MapMain() {
   );
 
   if (pending) {
-    return <LoadingScreen label="추억 지도 불러오는 중..." />;
+    return <LoadingScreen label="에피소드 지도 불러오는 중..." />;
   }
 
   if (error) {
@@ -37,16 +37,21 @@ export function MapMain() {
   const memories = data?.items ?? [];
 
   return (
-    <Screen label="추억 지도" background={BgMap} bleed className={styles.page}>
+    <Screen
+      label="에피소드 지도"
+      background={BgMap}
+      bleed
+      className={styles.page}
+    >
       <header className={styles.header}>
-        <h1 className={`${styles.title} typo-h1`}>추억</h1>
+        <h1 className={`${styles.title} typo-h1`}>에피소드</h1>
 
         <GlassPill
           tint="strong"
           className={styles.actionPill}
           actions={[
             {
-              label: "추억 추가",
+              label: "에피소드 추가",
               to: "/memory-write",
               icon: <IconPlus className={styles.plusIcon} />,
             },

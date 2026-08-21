@@ -57,7 +57,7 @@ export function MyProducts() {
   const {data, error, pending} = useAsync(() => listMyProducts(), []);
 
   if (pending) {
-    return <LoadingScreen label="나의 제품 불러오는 중..." />;
+    return <LoadingScreen label="나의 컬렉션 불러오는 중..." />;
   }
 
   if (error) {
@@ -68,7 +68,7 @@ export function MyProducts() {
   const rounds = Math.max(1, Math.ceil(items.length / slots.length));
 
   return (
-    <Screen label="나의 제품" className={styles.page}>
+    <Screen label="나의 컬렉션" className={styles.page}>
       <TopBar
         backTo="/"
         actions={
@@ -89,7 +89,7 @@ export function MyProducts() {
         }
       />
 
-      <h1 className={`${styles.title} typo-h1`}>나의 제품</h1>
+      <h1 className={`${styles.title} typo-h1`}>나의 컬렉션</h1>
 
       <div
         className={styles.collage}

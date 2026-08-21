@@ -49,7 +49,7 @@ export function MemoryDetail() {
   }, [memoryId, userId]);
 
   if (pending) {
-    return <LoadingScreen label="추억 불러오는 중..." />;
+    return <LoadingScreen label="에피소드 불러오는 중..." />;
   }
 
   if (error) {

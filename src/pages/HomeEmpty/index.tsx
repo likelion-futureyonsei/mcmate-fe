@@ -72,7 +72,7 @@ export function HomeEmpty() {
         </Glass>
 
         <div className={styles.total}>
-          <GlassButton to="/my-products" label="나의 제품">
+          <GlassButton to="/my-products" label="나의 컬렉션">
             <IconBag className={styles.totalIcon} />
           </GlassButton>
           <span className={styles.totalValue}>0/0</span>

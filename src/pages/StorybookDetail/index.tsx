@@ -92,7 +92,7 @@ export function StorybookDetail() {
               value:
                 productName ??
                 (storybook.scope === "place"
-                  ? "지역 헤리지티"
+                  ? "브랜드 여정"
                   : storybook.title),
             },
           ]}
