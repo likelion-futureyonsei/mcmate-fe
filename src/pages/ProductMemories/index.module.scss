@@ -66,6 +66,13 @@
   }
 }
 
+/* each thumbnail links to its own product, so the rail item is the anchor */
+.swatchLink {
+  display: flex;
+  flex: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .swatch {
   flex: none;
   width: 4.6rem;

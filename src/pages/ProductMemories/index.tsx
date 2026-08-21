@@ -1,47 +1,77 @@
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
+import {listMemories, listMyProducts, type Memory} from "@/api";
 import {IconEdit, IconLines, IconShare} from "@/assets/icons";
-import {
-  Memory1,
-  Memory2,
-  Memory3,
-  Memory4,
-  Memory5,
-  ShotStark,
-  Swatch1,
-  Swatch2,
-  Swatch3,
-  Swatch4,
-  Swatch5,
-} from "@/assets/images";
 import {CountBadge, GlassPill, Screen, TopBar} from "@/components";
+import {useAsync} from "@/hooks/useAsync";
+import {
+  memoryPhoto,
+  memoryPhotoFallback,
+  productShotImage,
+  productThumbImage,
+  withPhotoFallback,
+} from "@/lib";
+import {ErrorScreen, LoadingScreen} from "@/pages/Loading/LoadingScreen";
 
 import styles from "./index.module.scss";
 
-const product = {
-  name: "Stark 사이드 스터드 비세토스 백팩",
-  hero: ShotStark,
-  owned: 5,
-  total: 50,
+/** Photo heights of the drawn masonry, reused as the collection grows. */
+const PHOTO_HEIGHTS = [133, 174, 142, 125, 125];
+const COLUMN_COUNT = 3;
+
+/** Deals the memories into the three columns, keeping the newest at the top. */
+const toColumns = (memories: Memory[]) => {
+  const columns: {memory: Memory; height: number}[][] = Array.from(
+    {length: COLUMN_COUNT},
+    () => [],
+  );
+
+  memories.forEach((memory, index) => {
+    columns[index % COLUMN_COUNT].push({
+      memory,
+      height: PHOTO_HEIGHTS[index % PHOTO_HEIGHTS.length],
+    });
+  });
+
+  return columns;
 };
 
-/** Sibling products, in shelf order. */
-const swatches = [Swatch1, Swatch2, Swatch3, Swatch4, Swatch5];
-
-/** Masonry columns, each holding its photos top to bottom. */
-const columns = [
-  [
-    {src: Memory1, height: 133},
-    {src: Memory4, height: 125},
-  ],
-  [
-    {src: Memory2, height: 174},
-    {src: Memory5, height: 125},
-  ],
-  [{src: Memory3, height: 142}],
-];
-
 export function ProductMemories() {
+  const {userProductId} = useParams();
+
+  const {data, error, pending} = useAsync(async () => {
+    const products = await listMyProducts();
+    const requested = userProductId ? Number(userProductId) : null;
+    const target =
+      (requested === null
+        ? products.items[0]
+        : products.items.find((item) => item.id === requested)) ?? null;
+
+    if (!target) {
+      return {products: products.items, target: null, memories: [] as Memory[]};
+    }
+
+    const memories = await listMemories({product_id: target.id});
+
+    return {products: products.items, target, memories: memories.items};
+  }, [userProductId]);
+
+  if (pending) {
+    return <LoadingScreen label="제품 추억 불러오는 중..." />;
+  }
+
+  if (error) {
+    return <ErrorScreen message={error} />;
+  }
+
+  if (!data?.target) {
+    return (
+      <ErrorScreen message="등록된 제품이 없습니다. 제품을 먼저 등록해 주세요." />
+    );
+  }
+
+  const {target, products, memories} = data;
+
   return (
     <Screen label="제품 추억" className={styles.page}>
       <TopBar
@@ -53,7 +83,7 @@ export function ProductMemories() {
             actions={[
               {
                 label: "추억 작성",
-                to: "/memory-write",
+                to: `/memory-write?product=${target.id}`,
                 icon: <IconEdit className={styles.editIcon} />,
               },
               {label: "공유", icon: <IconShare className={styles.shareIcon} />},
@@ -66,32 +96,42 @@ export function ProductMemories() {
         }
       />
 
-      <img className={styles.hero} src={product.hero} alt="" />
+      <img
+        className={styles.hero}
+        src={productShotImage(target.product)}
+        alt=""
+      />
 
-      <p className={styles.name}>{product.name}</p>
-      <CountBadge owned={product.owned} total={product.total} />
+      <p className={styles.name}>{target.product.name}</p>
+      <CountBadge owned={target.capacity.used} total={target.capacity.total} />
 
       <div className={styles.swatches}>
-        {swatches.map((swatch, index) => (
-          <img
-            key={swatch}
-            className={styles.swatch}
-            src={swatch}
-            alt={`보유 제품 ${index + 1}`}
-          />
+        {products.map((item) => (
+          <Link
+            key={item.id}
+            to={`/product-memories/${item.id}`}
+            className={styles.swatchLink}
+          >
+            <img
+              className={styles.swatch}
+              src={productThumbImage(item.product)}
+              alt={item.product.name}
+            />
+          </Link>
         ))}
       </div>
 
       <div className={styles.grid}>
-        {columns.map((column, columnIndex) => (
+        {toColumns(memories).map((column, columnIndex) => (
           <div className={styles.column} key={columnIndex}>
-            {column.map((photo) => (
-              <Link key={photo.src} to="/memory-detail">
+            {column.map(({memory, height}) => (
+              <Link key={memory.id} to={`/memory-detail/${memory.id}`}>
                 <img
                   className={styles.photo}
-                  src={photo.src}
-                  alt=""
-                  style={{height: `${photo.height / 10}rem`}}
+                  src={memoryPhoto(memory)}
+                  onError={withPhotoFallback(memoryPhotoFallback(memory))}
+                  alt={memory.place_name || "추억 사진"}
+                  style={{height: `${height / 10}rem`}}
                 />
               </Link>
             ))}

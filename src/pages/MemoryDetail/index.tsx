@@ -1,3 +1,6 @@
+import {Link, useParams} from "react-router-dom";
+
+import {getMemory, listMemories, type Memory} from "@/api";
 import {
   IconCalendar,
   IconHeart,
@@ -5,30 +8,61 @@ import {
   IconPinSlim,
   IconShare,
 } from "@/assets/icons";
-import {Memory1, Memory2, Memory3, Memory4, Memory5} from "@/assets/images";
+import {useUserId} from "@/auth";
 import {GlassButton, MetaRow, Screen, TopBar} from "@/components";
+import {useAsync} from "@/hooks/useAsync";
+import {
+  memoryBody,
+  memoryPhoto,
+  memoryPhotoFallback,
+  memoryTitle,
+  shortDate,
+  withPhotoFallback,
+} from "@/lib";
+import {ErrorScreen, LoadingScreen} from "@/pages/Loading/LoadingScreen";
 
 import styles from "./index.module.scss";
 
-const memory = {
-  photo: Memory1,
-  order: 1,
-  place: "인천국제공항",
-  date: "8월 16일",
-  title: "드디어 출국 날 🛫",
-  text: "공항 바닥에 캐리어 두 개랑 가방 내려놓고 사진 찍는데 왜 이렇게 설렐까!!! 오빠 캐리어는 항상 나보다 크고, 내 가방 안엔 즉석카메라부터 챙겨넣었다. 우리 둘 다 아직 반쯤 잠든 얼굴인데 이 순간마저 남기고 싶어서 한 컷. 이제 진짜 출발이다. 이 가방이랑 함께한 첫 여행, 오래 기억하고 싶어서 여기 남겨둔다 🤍",
-};
-
-/** Other shots of the same product, at their native aspect ratio. */
-const filmstrip = [
-  {src: Memory1, width: 38},
-  {src: Memory2, width: 29},
-  {src: Memory3, width: 35},
-  {src: Memory4, width: 40},
-  {src: Memory5, width: 40},
-];
+/** Filmstrip frame widths from the design, reused as the strip grows. */
+const FRAME_WIDTHS = [38, 29, 35, 40, 40];
 
 export function MemoryDetail() {
+  const {memoryId} = useParams();
+  const userId = useUserId();
+
+  const {data, error, pending} = useAsync(async () => {
+    const memory = memoryId
+      ? await getMemory(Number(memoryId))
+      : ((await listMemories({owner: userId ?? undefined})).items[0] ?? null);
+
+    if (!memory) {
+      return null;
+    }
+
+    // Other shots of the same product, oldest first so "순서" is stable.
+    const siblings = await listMemories({product_id: memory.user_product});
+    const chronological = [...siblings.items].reverse();
+    const order =
+      chronological.findIndex((item) => item.id === memory.id) + 1 || 1;
+
+    return {memory, order, strip: chronological};
+  }, [memoryId, userId]);
+
+  if (pending) {
+    return <LoadingScreen label="추억 불러오는 중..." />;
+  }
+
+  if (error) {
+    return <ErrorScreen message={error} />;
+  }
+
+  if (!data) {
+    return <ErrorScreen message="아직 담긴 추억이 없습니다." />;
+  }
+
+  const {memory, order, strip} = data;
+  const title = memoryTitle(memory.note, memory.place_name);
+
   return (
     <Screen label="제품 추억 상세" bleed className={styles.page}>
       <div className={styles.hero}>
@@ -42,7 +76,12 @@ export function MemoryDetail() {
           }
         />
 
-        <img className={styles.photo} src={memory.photo} alt="" />
+        <img
+          className={styles.photo}
+          src={memoryPhoto(memory)}
+          onError={withPhotoFallback(memoryPhotoFallback(memory))}
+          alt=""
+        />
 
         <MetaRow
           className={styles.meta}
@@ -50,17 +89,17 @@ export function MemoryDetail() {
             {
               label: "순서",
               icon: <IconOrder className={styles.orderIcon} />,
-              value: memory.order,
+              value: order,
             },
             {
               label: "장소",
               icon: <IconPinSlim className={styles.pinIcon} />,
-              value: memory.place,
+              value: memory.place_name || "기록 없음",
             },
             {
               label: "날짜",
               icon: <IconCalendar className={styles.calendarIcon} />,
-              value: memory.date,
+              value: shortDate(memory.created_at),
             },
           ]}
         />
@@ -68,24 +107,32 @@ export function MemoryDetail() {
 
       <div className={styles.body}>
         <div className={styles.titleRow}>
-          <h1 className={styles.title}>{memory.title}</h1>
+          <h1 className={styles.title}>{title}</h1>
           <button type="button" className={styles.like} aria-label="좋아요">
             <IconHeart className={styles.heartIcon} />
           </button>
         </div>
 
-        <p className={styles.text}>{memory.text}</p>
+        <p className={styles.text}>{memoryBody(memory.note, title)}</p>
       </div>
 
       <div className={styles.filmstrip}>
-        {filmstrip.map((frame, index) => (
-          <img
-            key={`${frame.src}-${index}`}
-            className={styles.frame}
-            src={frame.src}
-            alt={`추억 사진 ${index + 1}`}
-            style={{width: `${frame.width / 10}rem`}}
-          />
+        {strip.map((frame: Memory, index: number) => (
+          <Link
+            key={frame.id}
+            to={`/memory-detail/${frame.id}`}
+            className={styles.frameLink}
+          >
+            <img
+              className={styles.frame}
+              src={memoryPhoto(frame)}
+              onError={withPhotoFallback(memoryPhotoFallback(frame))}
+              alt={`추억 사진 ${index + 1}`}
+              style={{
+                width: `${FRAME_WIDTHS[index % FRAME_WIDTHS.length] / 10}rem`,
+              }}
+            />
+          </Link>
         ))}
       </div>
     </Screen>

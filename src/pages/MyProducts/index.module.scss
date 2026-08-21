@@ -30,7 +30,8 @@
 .collage {
   position: relative;
   width: 39rem;
-  height: 62.7rem;
+  /* one board per pass through the layout template */
+  height: var(--collage-h, 62.7rem);
   margin: 0.3rem -2rem 0;
 }
 

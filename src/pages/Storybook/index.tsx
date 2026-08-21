@@ -1,38 +1,26 @@
 import {Link} from "react-router-dom";
 
+import {listStorybooks, type StorybookScopeType} from "@/api";
 import {IconHeart, IconLines, IconShare} from "@/assets/icons";
-import {
-  StoryBeach,
-  StoryHeritage1,
-  StoryHeritage2,
-  StoryRockwell,
-  StoryWalking,
-} from "@/assets/images";
 import {GlassPill, Screen, TopBar} from "@/components";
+import {useAsync} from "@/hooks/useAsync";
+import {storybookCover} from "@/lib";
+import {ErrorScreen, LoadingScreen} from "@/pages/Loading/LoadingScreen";
 
 import styles from "./index.module.scss";
 
 type StorybookScope = "collection" | "heritage";
 
+/** The frame's two tabs map onto the backend's `scope` values. */
+const apiScope: Record<StorybookScope, StorybookScopeType> = {
+  collection: "product",
+  heritage: "place",
+};
+
 const tabs: {id: StorybookScope; label: string; to: string}[] = [
   {id: "collection", label: "나의 컬렉션", to: "/storybook"},
   {id: "heritage", label: "지역 헤리지티", to: "/storybook/heritage"},
 ];
-
-const stories: Record<
-  StorybookScope,
-  {id: string; title: string; cover: string}[]
-> = {
-  collection: [
-    {id: "walking", title: "1권: 길을 나서다", cover: StoryWalking},
-    {id: "beach", title: "2권: 파도가 기억하는 것", cover: StoryBeach},
-    {id: "rockwell", title: "3권: 오래된 오후", cover: StoryRockwell},
-  ],
-  heritage: [
-    {id: "heritage-1", title: "청담 헤리지티", cover: StoryHeritage1},
-    {id: "heritage-2", title: "뮌헨 헤리지티", cover: StoryHeritage2},
-  ],
-};
 
 type StorybookProps = {
   /** Which storybook collection the frame opens on. */
@@ -40,6 +28,20 @@ type StorybookProps = {
 };
 
 export function Storybook({scope = "collection"}: StorybookProps) {
+  const {data, error, pending} = useAsync(() => listStorybooks(), []);
+
+  if (pending) {
+    return <LoadingScreen label="스토리북 불러오는 중..." />;
+  }
+
+  if (error) {
+    return <ErrorScreen message={error} />;
+  }
+
+  const stories = (data ?? []).filter(
+    (storybook) => storybook.scope === apiScope[scope],
+  );
+
   return (
     <Screen label="스토리북" className={styles.page}>
       <TopBar
@@ -79,14 +81,18 @@ export function Storybook({scope = "collection"}: StorybookProps) {
       </nav>
 
       <div className={styles.grid}>
-        {stories[scope].map((story) => (
+        {stories.map((storybook) => (
           <Link
-            key={story.id}
-            to="/storybook/detail"
-            aria-label={story.title}
+            key={storybook.id}
+            to={`/storybook/detail/${storybook.id}`}
+            aria-label={storybook.title}
             className={styles.card}
           >
-            <img className={styles.cover} src={story.cover} alt="" />
+            <img
+              className={styles.cover}
+              src={storybookCover(storybook)}
+              alt=""
+            />
             <span className={styles.like}>
               <IconHeart className={styles.heartIcon} />
             </span>

@@ -63,6 +63,13 @@
 .tiles {
   display: flex;
   gap: 0.8rem;
+  /* three tiles fit the shelf; a larger collection scrolls, as ScrollHint says */
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .tile {

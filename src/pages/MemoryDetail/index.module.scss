@@ -111,6 +111,13 @@
   }
 }
 
+/* each frame links to its own memory, so the strip item is the anchor */
+.frameLink {
+  display: flex;
+  flex: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .frame {
   flex: none;
   height: 5rem;

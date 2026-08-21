@@ -1,15 +1,18 @@
-import type {CSSProperties} from "react";
-import {Link} from "react-router-dom";
+import {useState, type CSSProperties} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import {Glass} from "@samasante/liquid-glass";
 
+import {saveCharacter, type CharacterPayload} from "@/api";
 import {IconBody, IconPalette, IconPattern, IconTick} from "@/assets/icons";
 import {BgCharacter} from "@/assets/images";
+import {useAuth} from "@/auth";
 import {GlassButton, Logo, Screen, ScrollHint} from "@/components";
 
 import styles from "./index.module.scss";
 import {
   bodyOptions,
   colorOptions,
+  defaultSelection,
   patternOptions,
   preview,
   tabs,
@@ -45,9 +48,54 @@ type CharacterProps = {
 /**
  * Character customiser. One frame per picker (body / colour / pattern), with
  * the folder tabs switching between them.
+ *
+ * Each tile writes straight through to `POST/PATCH /characters`, because the
+ * tabs are separate routes and an unsaved selection would not survive the hop.
  */
 export function Character({tab = "body"}: CharacterProps) {
+  const navigate = useNavigate();
+  const {user, refresh} = useAuth();
+  const character = user?.character ?? null;
+
+  const [selection, setSelection] = useState<CharacterPayload>({
+    doll: character?.doll ?? defaultSelection.doll,
+    pattern: character?.pattern ?? defaultSelection.pattern,
+    color: character?.color ?? defaultSelection.color,
+    equipped_product: character?.equipped_product ?? null,
+  });
+  const [saving, setSaving] = useState(false);
+
   const scrolls = optionCount[tab] > VISIBLE_TILES;
+
+  const choose = async (patch: Partial<CharacterPayload>) => {
+    const next = {...selection, ...patch};
+
+    setSelection(next);
+    setSaving(true);
+
+    try {
+      await saveCharacter(character?.id ?? null, next);
+      await refresh();
+    } catch {
+      // Roll back so the tray keeps showing what the server actually holds.
+      setSelection(selection);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  /**
+   * On a first run nothing has been tapped yet, so confirming has to create the
+   * character from the defaults — otherwise the shelf would bounce the user
+   * straight back here.
+   */
+  const finishSetup = async () => {
+    if (!character) {
+      await choose({});
+    }
+
+    navigate("/", {replace: true});
+  };
 
   return (
     <Screen
@@ -62,7 +110,8 @@ export function Character({tab = "body"}: CharacterProps) {
 
         <GlassButton
           label="선택 완료"
-          to="/"
+          onClick={() => void finishSetup()}
+          disabled={saving}
           tint="subtle"
           className={styles.confirm}
         >
@@ -89,57 +138,75 @@ export function Character({tab = "body"}: CharacterProps) {
       <Glass className={styles.tray}>
         <ul className={styles.options}>
           {tab === "body" &&
-            bodyOptions.map((option, index) => (
-              <li key={option.id}>
-                <button
-                  type="button"
-                  aria-label={option.name}
-                  aria-pressed={index === 0}
-                  className={`${styles.tile} ${index === 0 ? styles.tileSelected : ""}`}
-                >
-                  <img
-                    className={styles.figure}
-                    src={option.thumb}
-                    alt=""
-                    style={{
-                      width: `${option.size.w / 10}rem`,
-                      height: `${option.size.h / 10}rem`,
-                    }}
-                  />
-                </button>
-              </li>
-            ))}
+            bodyOptions.map((option) => {
+              const active = option.doll === selection.doll;
+
+              return (
+                <li key={option.id}>
+                  <button
+                    type="button"
+                    aria-label={option.name}
+                    aria-pressed={active}
+                    disabled={saving}
+                    onClick={() => void choose({doll: option.doll})}
+                    className={`${styles.tile} ${active ? styles.tileSelected : ""}`}
+                  >
+                    <img
+                      className={styles.figure}
+                      src={option.thumb}
+                      alt=""
+                      style={{
+                        width: `${option.size.w / 10}rem`,
+                        height: `${option.size.h / 10}rem`,
+                      }}
+                    />
+                  </button>
+                </li>
+              );
+            })}
 
           {tab === "color" &&
-            colorOptions.map((option, index) => (
-              <li key={option.id}>
-                <button
-                  type="button"
-                  aria-label={option.name}
-                  aria-pressed={index === 0}
-                  className={`${styles.tile} ${styles.tileColor} ${index === 0 ? styles.tileSelected : ""}`}
-                >
-                  <span
-                    className={styles.chip}
-                    style={{"--chip-color": option.value} as CSSProperties}
-                  />
-                </button>
-              </li>
-            ))}
+            colorOptions.map((option) => {
+              const active = option.color === selection.color;
+
+              return (
+                <li key={option.id}>
+                  <button
+                    type="button"
+                    aria-label={option.name}
+                    aria-pressed={active}
+                    disabled={saving}
+                    onClick={() => void choose({color: option.color})}
+                    className={`${styles.tile} ${styles.tileColor} ${active ? styles.tileSelected : ""}`}
+                  >
+                    <span
+                      className={styles.chip}
+                      style={{"--chip-color": option.value} as CSSProperties}
+                    />
+                  </button>
+                </li>
+              );
+            })}
 
           {tab === "pattern" &&
-            patternOptions.map((option, index) => (
-              <li key={option.id}>
-                <button
-                  type="button"
-                  aria-label={option.name}
-                  aria-pressed={index === 0}
-                  className={`${styles.tile} ${styles.tilePattern} ${index === 0 ? styles.tileSelected : ""}`}
-                >
-                  <img className={styles.swatch} src={option.image} alt="" />
-                </button>
-              </li>
-            ))}
+            patternOptions.map((option) => {
+              const active = option.pattern === selection.pattern;
+
+              return (
+                <li key={option.id}>
+                  <button
+                    type="button"
+                    aria-label={option.name}
+                    aria-pressed={active}
+                    disabled={saving}
+                    onClick={() => void choose({pattern: option.pattern})}
+                    className={`${styles.tile} ${styles.tilePattern} ${active ? styles.tileSelected : ""}`}
+                  >
+                    <img className={styles.swatch} src={option.image} alt="" />
+                  </button>
+                </li>
+              );
+            })}
         </ul>
 
         {scrolls ? <ScrollHint /> : null}

@@ -1,5 +1,6 @@
 import {RouterProvider} from "react-router-dom";
 
+import {AuthProvider} from "@/auth";
 import {useDarkMode, useRouter} from "@/hooks";
 import {useEffect} from "react";
 
@@ -12,9 +13,9 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <AuthProvider>
       <RouterProvider router={router} />
-    </>
+    </AuthProvider>
   );
 };
 

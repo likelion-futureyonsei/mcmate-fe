@@ -1,28 +1,78 @@
+import {useParams} from "react-router-dom";
+
+import {getMemory, getUser, listMemories} from "@/api";
 import {IconCalendar, IconHeart, IconPerson, IconPinSlim} from "@/assets/icons";
-import {Memory1, Swatch1} from "@/assets/images";
 import {MetaRow, Screen, TopBar} from "@/components";
+import {useAsync} from "@/hooks/useAsync";
+import {
+  memoryBody,
+  memoryPhoto,
+  memoryPhotoFallback,
+  memoryTitle,
+  shortDate,
+  withPhotoFallback,
+} from "@/lib";
+import {ErrorScreen, LoadingScreen} from "@/pages/Loading/LoadingScreen";
 
 import styles from "./index.module.scss";
 
-const memory = {
-  printBack: Swatch1,
-  printFront: Memory1,
-  user: "_yykib",
-  place: "인천국제공항",
-  date: "8월 16일",
-  title: "드디어 출국 날 🛫",
-  text: "공항 바닥에 캐리어 두 개랑 가방 내려놓고 사진 찍는데 왜 이렇게 설렐까!!! 오빠 캐리어는 항상 나보다 크고, 내 가방 안엔 즉석카메라부터 챙겨넣었다. 우리 둘 다 아직 반쯤 잠든 얼굴인데 이 순간마저 남기고 싶어서 한 컷. 이제 진짜 출발이다. 이 가방이랑 함께한 첫 여행, 오래 기억하고 싶어서 여기 남겨둔다 🤍",
-};
-
 export function SharedMemoryDetail() {
+  const {memoryId} = useParams();
+
+  const {data, error, pending} = useAsync(async () => {
+    const memory = memoryId
+      ? await getMemory(Number(memoryId))
+      : ((await listMemories({limit: 1})).items[0] ?? null);
+
+    if (!memory) {
+      return null;
+    }
+
+    // `GET /users/{id}` answers with the public shape for anybody but yourself.
+    const author = await getUser(memory.owner).catch(() => null);
+
+    // The frame stacks two prints; the neighbouring shot of the same product
+    // stands in for the one underneath.
+    const siblings = await listMemories({product_id: memory.user_product});
+    const behind =
+      siblings.items.find((item) => item.id !== memory.id) ?? memory;
+
+    return {memory, author, behind};
+  }, [memoryId]);
+
+  if (pending) {
+    return <LoadingScreen label="추억 불러오는 중..." />;
+  }
+
+  if (error) {
+    return <ErrorScreen message={error} />;
+  }
+
+  if (!data) {
+    return <ErrorScreen message="공개된 추억이 아직 없습니다." />;
+  }
+
+  const {memory, author, behind} = data;
+  const title = memoryTitle(memory.note, memory.place_name);
+
   return (
     <Screen label="다른 사람 추억 상세" bleed className={styles.page}>
       <div className={styles.hero}>
         <TopBar className={styles.topBar} backTo="/map" tint="subtle" />
 
         <div className={styles.prints}>
-          <img className={styles.printBack} src={memory.printBack} alt="" />
-          <img className={styles.printFront} src={memory.printFront} alt="" />
+          <img
+            className={styles.printBack}
+            src={memoryPhoto(behind)}
+            onError={withPhotoFallback(memoryPhotoFallback(behind))}
+            alt=""
+          />
+          <img
+            className={styles.printFront}
+            src={memoryPhoto(memory)}
+            onError={withPhotoFallback(memoryPhotoFallback(memory))}
+            alt=""
+          />
         </div>
 
         <MetaRow
@@ -31,17 +81,17 @@ export function SharedMemoryDetail() {
             {
               label: "유저",
               icon: <IconPerson className={styles.personIcon} />,
-              value: memory.user,
+              value: author?.nickname ?? `user${memory.owner}`,
             },
             {
               label: "장소",
               icon: <IconPinSlim className={styles.pinIcon} />,
-              value: memory.place,
+              value: memory.place_name || "기록 없음",
             },
             {
               label: "날짜",
               icon: <IconCalendar className={styles.calendarIcon} />,
-              value: memory.date,
+              value: shortDate(memory.created_at),
             },
           ]}
         />
@@ -49,13 +99,13 @@ export function SharedMemoryDetail() {
 
       <div className={styles.body}>
         <div className={styles.titleRow}>
-          <h1 className={styles.title}>{memory.title}</h1>
+          <h1 className={styles.title}>{title}</h1>
           <button type="button" className={styles.like} aria-label="좋아요">
             <IconHeart className={styles.heartIcon} />
           </button>
         </div>
 
-        <p className={styles.text}>{memory.text}</p>
+        <p className={styles.text}>{memoryBody(memory.note, title)}</p>
       </div>
     </Screen>
   );

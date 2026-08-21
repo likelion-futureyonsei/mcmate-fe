@@ -1,27 +1,49 @@
-import {useEffect, useRef} from "react";
-import {Link} from "react-router-dom";
+import {useEffect, useRef, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
+import {ApiError, errorMessage, registerProduct, type Product} from "@/api";
 import {
   IconClose,
   IconFlashlight,
   IconKeypad,
   IconQrFrame,
 } from "@/assets/icons";
-import {Swatch1} from "@/assets/images";
+import {useAuth} from "@/auth";
 import {GlassButton, Screen, TopBar} from "@/components";
+import {useAsync} from "@/hooks/useAsync";
+import {
+  deriveSerial,
+  parseCode,
+  productThumbImage,
+  resolveCatalogue,
+  scanVideo,
+} from "@/lib";
+import {LoadingScreen} from "@/pages/Loading/LoadingScreen";
 
 import styles from "./index.module.scss";
 
-/** Product resolved from the scanned code. */
-const scanned = {
-  name: "Stark 사이드 스터드 비세토스 백팩",
-  thumb: Swatch1,
-  color: "Cognac",
-  size: "M",
-};
-
 export function QrRegister() {
+  const navigate = useNavigate();
+  const {user} = useAuth();
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  /**
+   * Candidates come from `GET /recommend`, the only route that returns catalogue
+   * products — the API has no code-to-product lookup.
+   */
+  const catalogue = useAsync(
+    () => resolveCatalogue(user?.character?.id ?? null),
+    [user?.character?.id],
+  );
+
+  const [scannedId, setScannedId] = useState<number | null>(null);
+  const [serialNo, setSerialNo] = useState<string | null>(null);
+  const [status, setStatus] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+
+  const candidates = catalogue.data ?? [];
+  const scanned: Product | null =
+    candidates.find((item) => item.id === scannedId) ?? candidates[0] ?? null;
 
   useEffect(() => {
     const video = videoRef.current;
@@ -32,6 +54,7 @@ export function QrRegister() {
 
     let stream: MediaStream | null = null;
     let cancelled = false;
+    let stopScanning: (() => void) | null = null;
 
     const startCamera = async () => {
       try {
@@ -47,6 +70,12 @@ export function QrRegister() {
 
         video.srcObject = stream;
         await video.play();
+
+        stopScanning = scanVideo(video, (raw) => {
+          const code = parseCode(raw);
+          setScannedId(code.productId);
+          setSerialNo(code.serialNo);
+        });
       } catch {
         stream?.getTracks().forEach((track) => track.stop());
       }
@@ -56,10 +85,41 @@ export function QrRegister() {
 
     return () => {
       cancelled = true;
+      stopScanning?.();
       stream?.getTracks().forEach((track) => track.stop());
       video.srcObject = null;
     };
   }, []);
+
+  const register = async () => {
+    if (saving) {
+      return;
+    }
+
+    if (!scanned) {
+      setStatus("등록할 제품을 확인할 수 없습니다. 번호 입력을 이용해 주세요.");
+      return;
+    }
+
+    setSaving(true);
+    setStatus(null);
+
+    try {
+      await registerProduct(scanned.id, serialNo ?? deriveSerial(scanned));
+      // The shelf is the payoff of registering, so that is where this lands.
+      navigate("/", {replace: true});
+    } catch (cause) {
+      // 409 covers "already yours" and "owned by somebody else".
+      setStatus(
+        cause instanceof ApiError ? cause.message : errorMessage(cause),
+      );
+      setSaving(false);
+    }
+  };
+
+  if (saving) {
+    return <LoadingScreen label="제품 등록 중..." />;
+  }
 
   return (
     <Screen
@@ -109,26 +169,44 @@ export function QrRegister() {
         <span className={styles.handle} aria-hidden="true" />
 
         <div className={styles.product}>
-          <img className={styles.thumb} src={scanned.thumb} alt="" />
+          <img
+            className={styles.thumb}
+            src={scanned ? productThumbImage(scanned) : undefined}
+            alt=""
+          />
 
           <div className={styles.info}>
-            <p className={styles.name}>{scanned.name}</p>
+            <p className={styles.name}>
+              {status ??
+                scanned?.name ??
+                (catalogue.pending
+                  ? "제품 정보 확인 중..."
+                  : "제품 정보를 확인할 수 없습니다")}
+            </p>
             <div className={styles.specs}>
               <p>
                 <span className={styles.specLabel}>색상: </span>
-                <span className={styles.specValue}>{scanned.color}</span>
+                <span className={styles.specValue}>
+                  {scanned?.color || "-"}
+                </span>
               </p>
               <p>
-                <span className={styles.specLabel}>사이즈: </span>
-                <span className={styles.specValue}>{scanned.size}</span>
+                <span className={styles.specLabel}>패턴: </span>
+                <span className={styles.specValue}>
+                  {scanned?.pattern || "-"}
+                </span>
               </p>
             </div>
           </div>
         </div>
 
-        <Link to="/my-products" className={styles.submit}>
+        <button
+          type="button"
+          className={styles.submit}
+          onClick={() => void register()}
+        >
           등록하기
-        </Link>
+        </button>
       </div>
     </Screen>
   );

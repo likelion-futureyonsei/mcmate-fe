@@ -1,11 +1,11 @@
 import {Link} from "react-router-dom";
 
 import {IconChevronRight, IconClose} from "@/assets/icons";
+import {useAuth} from "@/auth";
 import {Avatar, GlassButton, Screen} from "@/components";
+import {LoadingScreen} from "@/pages/Loading/LoadingScreen";
 
 import styles from "./index.module.scss";
-
-const account = {name: "_yykib", hint: "계정 정보"};
 
 const groups = [
   {
@@ -18,7 +18,16 @@ const groups = [
   },
 ];
 
+/** The one row backed by an endpoint (`DELETE /tokens`). */
+const LOG_OUT = "로그아웃";
+
 export function Settings() {
+  const {user, status, logOut} = useAuth();
+
+  if (status === "loading") {
+    return <LoadingScreen label="계정 정보 불러오는 중..." />;
+  }
+
   return (
     <Screen label="설정" bleed flush className={styles.page}>
       <div className={styles.sheet}>
@@ -38,15 +47,19 @@ export function Settings() {
         <Link to="/character/body" className={styles.account}>
           <Avatar />
           <span className={styles.accountText}>
-            <span className={styles.accountName}>{account.name}</span>
-            <span className={styles.accountHint}>{account.hint}</span>
+            <span className={styles.accountName}>
+              {user?.nickname ?? "게스트"}
+            </span>
+            <span className={styles.accountHint}>
+              {user?.email ?? "계정 정보"}
+            </span>
           </span>
           <IconChevronRight
             className={`${styles.chevron} ${styles.accountChevron}`}
           />
         </Link>
 
-        {groups.map((group) => (
+        {groups.map((group, index) => (
           <section className={styles.group} key={group.heading}>
             <h2 className={styles.groupHeading}>{group.heading}</h2>
 
@@ -58,6 +71,19 @@ export function Settings() {
                 />
               </button>
             ))}
+
+            {index === groups.length - 1 ? (
+              <button
+                type="button"
+                className={styles.row}
+                onClick={() => void logOut()}
+              >
+                {LOG_OUT}
+                <IconChevronRight
+                  className={`${styles.chevron} ${styles.rowChevron}`}
+                />
+              </button>
+            ) : null}
           </section>
         ))}
       </div>

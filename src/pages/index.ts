@@ -1,6 +1,8 @@
 /* Onboarding */
 export * from "./SignUp";
 export * from "./Loading";
+export * from "./Loading/LoadingScreen";
+export * from "./Loading/Onboarding";
 
 /* Home flow */
 export * from "./Home";

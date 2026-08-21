@@ -2,59 +2,58 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 import {Glass} from "@samasante/liquid-glass";
 
+import {listMemories, listMyProducts} from "@/api";
 import {IconChevronRight, IconSearchGlass, IconStar} from "@/assets/icons";
-import {
-  Memory1,
-  Memory2,
-  Memory3,
-  Memory5,
-  Swatch1,
-  Swatch2,
-  Swatch3,
-} from "@/assets/images";
+import {useUserId} from "@/auth";
 import {Avatar, CountBadge, Screen} from "@/components";
+import {useAsync} from "@/hooks/useAsync";
+import {
+  memoryPhoto,
+  memoryPhotoFallback,
+  productThumbImage,
+  shortDate,
+  withPhotoFallback,
+} from "@/lib";
+import {ErrorScreen, LoadingScreen} from "@/pages/Loading/LoadingScreen";
 
 import styles from "./index.module.scss";
 
-const products = [
-  {
-    id: "stark",
-    name: "Stark 사이드 스터드 비세토스 백팩",
-    thumb: Swatch1,
-    owned: 5,
-    total: 50,
-  },
-  {
-    id: "belt",
-    name: "비세토스 프루스튼 벨트백",
-    thumb: Swatch2,
-    owned: 3,
-    total: 50,
-  },
-  {
-    id: "ottomar",
-    name: "Ottomar 비세토스 위켄더",
-    thumb: Swatch3,
-    owned: 35,
-    total: 100,
-  },
-];
-
-const categories = [
-  {
-    id: "favourite",
-    label: "즐겨찾기",
-    image: Memory1,
-    width: 75,
-    starred: true,
-  },
-  {id: "background", label: "배경", image: Memory2, width: 58},
-  {id: "animal", label: "동물", image: Memory3, width: 70},
-  {id: "food", label: "음식", image: Memory5, width: 80},
-];
+/** Tile widths of the drawn memory rail, reused as the list grows. */
+const TILE_WIDTHS = [75, 58, 70, 80];
+const MEMORY_TILES = 8;
 
 export function Search() {
+  const userId = useUserId();
   const [query, setQuery] = useState("");
+
+  const {data, error, pending} = useAsync(async () => {
+    const [products, memories] = await Promise.all([
+      listMyProducts(),
+      listMemories({owner: userId ?? undefined, limit: MEMORY_TILES}),
+    ]);
+
+    return {products: products.items, memories: memories.items};
+  }, [userId]);
+
+  if (pending) {
+    return <LoadingScreen label="검색 정보 불러오는 중..." />;
+  }
+
+  if (error) {
+    return <ErrorScreen message={error} />;
+  }
+
+  // The API exposes no search parameter, so the loaded collection is filtered here.
+  const needle = query.trim().toLowerCase();
+  const matches = (...fields: string[]) =>
+    !needle || fields.some((field) => field.toLowerCase().includes(needle));
+
+  const products = (data?.products ?? []).filter((item) =>
+    matches(item.product.name, item.product.line, item.product.color),
+  );
+  const memories = (data?.memories ?? []).filter((memory) =>
+    matches(memory.place_name, memory.note),
+  );
 
   return (
     <Screen label="검색" className={styles.page}>
@@ -88,16 +87,23 @@ export function Search() {
         </Link>
 
         <div className={styles.rows}>
-          {products.map((product) => (
+          {products.map((item) => (
             <Link
-              key={product.id}
-              to="/product-memories"
+              key={item.id}
+              to={`/product-memories/${item.id}`}
               className={styles.row}
             >
-              <img className={styles.rowThumb} src={product.thumb} alt="" />
+              <img
+                className={styles.rowThumb}
+                src={productThumbImage(item.product)}
+                alt=""
+              />
               <span className={styles.rowInfo}>
-                <span className={styles.rowName}>{product.name}</span>
-                <CountBadge owned={product.owned} total={product.total} />
+                <span className={styles.rowName}>{item.product.name}</span>
+                <CountBadge
+                  owned={item.capacity.used}
+                  total={item.capacity.total}
+                />
               </span>
             </Link>
           ))}
@@ -111,26 +117,33 @@ export function Search() {
         </Link>
 
         <div className={styles.categories}>
-          {categories.map((category) => (
-            <Link
-              key={category.id}
-              to="/map"
-              aria-label={category.label}
-              className={styles.category}
-              style={{width: `${category.width / 10}rem`}}
-            >
-              <img
-                className={styles.categoryImage}
-                src={category.image}
-                alt=""
-              />
-              <span className={styles.categoryScrim} aria-hidden="true" />
-              {category.starred ? (
-                <IconStar className={styles.categoryStar} />
-              ) : null}
-              <span className={styles.categoryLabel}>{category.label}</span>
-            </Link>
-          ))}
+          {memories.map((memory, index) => {
+            const label = memory.place_name || shortDate(memory.created_at);
+
+            return (
+              <Link
+                key={memory.id}
+                to={`/memory-detail/${memory.id}`}
+                aria-label={label}
+                className={styles.category}
+                style={{
+                  width: `${TILE_WIDTHS[index % TILE_WIDTHS.length] / 10}rem`,
+                }}
+              >
+                <img
+                  className={styles.categoryImage}
+                  src={memoryPhoto(memory)}
+                  onError={withPhotoFallback(memoryPhotoFallback(memory))}
+                  alt=""
+                />
+                <span className={styles.categoryScrim} aria-hidden="true" />
+                {index === 0 ? (
+                  <IconStar className={styles.categoryStar} />
+                ) : null}
+                <span className={styles.categoryLabel}>{label}</span>
+              </Link>
+            );
+          })}
         </div>
       </section>
     </Screen>

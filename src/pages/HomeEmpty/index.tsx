@@ -1,9 +1,11 @@
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {Glass} from "@samasante/liquid-glass";
 
+import {listMyProducts} from "@/api";
 import {IconBag, IconEdit, IconMail, IconPlus} from "@/assets/icons";
 import {BgHomeEmpty, ProductSlotEmpty} from "@/assets/images";
 import {Avatar, GlassButton, Logo, Screen, ScrollHint} from "@/components";
+import {useAsync} from "@/hooks/useAsync";
 
 import styles from "./index.module.scss";
 
@@ -11,6 +13,14 @@ import styles from "./index.module.scss";
 const slots = [0, 1, 2];
 
 export function HomeEmpty() {
+  const {data} = useAsync(() => listMyProducts(), []);
+
+  // Rendered straight away — the empty shelf is the correct first paint here, so
+  // there is no loading frame. Once a product turns up, the real shelf takes over.
+  if (data?.items.length) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <Screen
       label="홈"
@@ -34,7 +44,8 @@ export function HomeEmpty() {
             <IconMail className={styles.mailIcon} />
           </GlassButton>
 
-          <GlassButton label="추억 작성" to="/memory-write">
+          {/* nothing to write about yet: the first step is registering a product */}
+          <GlassButton label="추억 작성" to="/qr-register">
             <IconEdit className={styles.editIcon} />
           </GlassButton>
         </div>

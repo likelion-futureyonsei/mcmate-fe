@@ -1,16 +1,75 @@
 import {useState} from "react";
-import {Link} from "react-router-dom";
 import {Glass} from "@samasante/liquid-glass";
 
+import {ApiError, errorMessage} from "@/api";
 import {IconHelpCircle, IconInfo} from "@/assets/icons";
 import {AvatarYykib} from "@/assets/images";
+import {useAuth} from "@/auth";
 import {Logo, Screen} from "@/components";
 
 import styles from "./index.module.scss";
 
+/**
+ * The account model requires a nickname, but the frame only asks for an email
+ * and a password — so the local part of the address becomes the initial
+ * nickname, editable later through `PATCH /users/{id}`.
+ */
+const nicknameFrom = (email: string) =>
+  (email.split("@")[0] || "mcmate").slice(0, 30);
+
+const ALREADY_REGISTERED = "이미 가입된";
+
 export function SignUp() {
+  const {signUp, logIn} = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  const submit = async () => {
+    if (submitting) {
+      return;
+    }
+
+    if (!email.trim() || !password) {
+      setError("이메일과 비밀번호를 입력해 주세요.");
+      return;
+    }
+
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      await signUp({
+        email: email.trim().toLowerCase(),
+        password,
+        nickname: nicknameFrom(email.trim()),
+        // The frame has no consent checkbox; the privacy notice below the form
+        // is the consent surface, and the backend refuses signup without it.
+        agree_data: true,
+      });
+    } catch (cause) {
+      // One button covers both cases: a known address logs in instead.
+      if (
+        cause instanceof ApiError &&
+        cause.status === 400 &&
+        cause.message.includes(ALREADY_REGISTERED)
+      ) {
+        try {
+          await logIn(email.trim().toLowerCase(), password);
+          return;
+        } catch (loginCause) {
+          setError(errorMessage(loginCause));
+          setSubmitting(false);
+          return;
+        }
+      }
+
+      setError(errorMessage(cause));
+      setSubmitting(false);
+    }
+  };
 
   return (
     <Screen
@@ -24,7 +83,10 @@ export function SignUp() {
 
       <form
         className={styles.form}
-        onSubmit={(event) => event.preventDefault()}
+        onSubmit={(event) => {
+          event.preventDefault();
+          void submit();
+        }}
       >
         <Glass className={styles.field}>
           <input
@@ -58,15 +120,27 @@ export function SignUp() {
         </Glass>
 
         <Glass className={styles.submit}>
-          <Link to="/" className={styles.submitLabel}>
+          {/*
+           * No loading frame here on purpose: success redirects to `/loading`,
+           * which is the journey's single loading step. Showing one during the
+           * request too would restart the progress bar halfway through.
+           */}
+          <button
+            type="submit"
+            className={styles.submitLabel}
+            disabled={submitting}
+          >
             회원가입
-          </Link>
+          </button>
         </Glass>
       </form>
 
+      {/* the help row doubles as the form's status line */}
       <button type="button" className={styles.help}>
         <IconInfo className={styles.helpIcon} />
-        <span className={styles.helpLabel}>로그인이 안 되나요?</span>
+        <span className={styles.helpLabel} role={error ? "alert" : undefined}>
+          {error ?? "로그인이 안 되나요?"}
+        </span>
       </button>
 
       <button type="button" className={styles.privacy}>
